@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import os
+import shutil
+from xml.etree.ElementInclude import include
+from Jenga import *
+from Jenga.GlobalToolchains import RegisterJengaGlobalToolchains
+
+with workspace("NKWindowTuto", location="."):
+    #RegisterJengaGlobalToolchains()
+
+    # Nom du toolchain Windows clang-mingw
+    TC_WINDOWS = "nk-windows-clang-mingw"
+
+    # Enregistrement du toolchain Windows avec resolution explicite du compilateur
+    _clang = shutil.which("clang")                              # Compilateur C
+    _clangxx = shutil.which("clang++")                          # compilateur C++
+    _llvm_ar = shutil.which("llvm-ar") or shutil.which("ar")    # editeur de lien    
+
+    # Precaution pour la definition de la toolchain
+    if not _clang and os.path.exists(r"C:\msys64\ucrt64\bin\clang.exe"):
+        _clang = r"C:\msys64\ucrt64\bin\clang.exe"
+    if not _clangxx and os.path.exists(r"C:\msys64\ucrt64\bin\clang++.exe"):
+        _clangxx = r"C:\msys64\ucrt64\bin\clang++.exe"
+    if not _llvm_ar and os.path.exists(r"C:\msys64\ucrt64\bin\llvm-ar.exe"):
+        _llvm_ar = r"C:\msys64\ucrt64\bin\llvm-ar.exe"
+    if not _llvm_ar and os.path.exists(r"C:\msys64\ucrt64\bin\ar.exe"):
+        _llvm_ar = r"C:\msys64\ucrt64\bin\ar.exe"
+
+    # Configuration de la toolchain
+    with toolchain(TC_WINDOWS, "clang"):
+        settarget("Windows", "x86_64", "mingw")
+        targettriple(r"x86_64-w64-windows-gnu")
+        ccompiler(_clang or "clang")
+        cppcompiler(_clangxx or "clang++")
+        linker(_clangxx or "clang++")
+        if _llvm_ar:
+            archiver(_llvm_ar)
+        cflags([
+            "--target=x86_64-w64-windows-gnu",
+            "-DWINVER=0x0601",
+            "-D_WIN32_WINNT=0x0601",
+        ])
+        cxxflags([
+            "--target=x86_64-w64-windows-gnu",
+            "-DWINVER=0x0601",
+            "-D_WIN32_WINNT=0x0601",
+        ])
+        ldflags(["--target=x86_64-w64-windows-gnu"])
+
+    configurations(["Debug", "Release"])
+
+    # ===== Plateformes et architectures cibles ==================================
+    targetoses([
+        TargetOS.WINDOWS,
+        TargetOS.LINUX,
+        TargetOS.MACOS,
+    ])
+
+    targetarchs([
+        TargetArch.X86_64,   # Desktop (Windows, Linux, macOS, Xbox)
+    ])
+
+    # ===== Options Linux : choix du backend de fenetrage ========================
+    newoption(
+        trigger="linux-backend",
+        value="BACKEND",
+        allowed=[
+            ["xlib",     "X11/XLib  (defaut, le plus compatible)"],
+            ["xcb",      "X11/XCB   (plus leger, asynchrone)"],
+            ["wayland",  "Wayland   (compositeurs modernes, sans X11)"],
+            ["headless", "Pas de fenetre (CI, serveurs, WSL sans ecran)"],
+        ],
+        default="xlib",
+        description="Backend de fenetrage Linux"
+    )
+
+    newoption(
+        trigger="headless",
+        description="[Obsolete] Utiliser --options linux-backend=headless"
+    )
+
+    # ===== Option Windows : Desktop vs UWP ====================================
+    # Jenga v2.0.1 n'expose pas TargetOS.UWP; on route UWP via une option.
+    newoption(
+        trigger="windows-runtime",
+        value="RUNTIME",
+        allowed=[
+            ["desktop", "Windows desktop classique (Win32)"],
+            ["uwp",     "Windows Runtime (UWP)"],
+        ],
+        default="desktop",
+        description="Runtime Windows cible (desktop ou UWP)"
+    )
+
+    # startproject("Sandbox")
+
+    # =========================================================================
+    # Inclusion de chaque projet depuis son propre fichier .jenga
+    # L'ordre respecte la chaine de dependances.
+    # =========================================================================
+    with include("Externals/libs/NKGlad/NKGlad.lib.jenga"):
+        pass
+
+    with include("Externals/libs/NKMath/NKMath.lib.jenga"):
+        pass
+    
+    with include("OpenPrj/open.prj.jenga"):
+        pass 

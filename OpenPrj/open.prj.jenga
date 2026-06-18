@@ -1,0 +1,58 @@
+from Jenga import *
+
+with project("MyOpenGLApp"):
+    windowedapp()
+    language("C++")
+    cppdialect("C++20")
+    location(".")
+
+    _TC_WINDOWS = "nk-windows-clang-mingw"
+    usetoolchain(_TC_WINDOWS)
+
+    files([
+        "src/**.cpp",
+    ])
+
+    includedirs([
+        "src",
+        "%{wks.location}/Externals/libs/nkentseu/include",
+        "%{wks.location}/Externals/libs/NKGlad/include",
+    ])
+    
+    links([
+        "NKPlatform", "NKCore", "NKMemory", "NKContainers", "NKMath",   # foundation
+        "NKTime", "NKLogger", "NKThreading",                            # system
+        "NKEvent", "NKWindow", "NKContext",                             # Runtime & Graphics
+        "NKGlad"                                                         # OpenGL Loader
+    ])
+
+    libdirs([
+        "%{wks.location}/Externals/libs/nkentseu/lib",
+    ])
+
+    objdir("%{wks.location}/Build/Obj/%{cfg.buildcfg}-%{cfg.system}/%{prj.name}")
+    targetdir("%{wks.location}/Build/Bin/%{cfg.buildcfg}-%{cfg.system}/%{prj.name}")
+
+    # ===== Windows ================================================================
+    with filter("system:Windows"):
+        defines([
+            "WIN32_LEAN_AND_MEAN",
+            "_UNICODE", "UNICODE",
+        ])
+
+        links([
+            "user32", "gdi32", "opengl32", "dwmapi", "shell32",
+            "xinput", "mf", "mfplat", "mfreadwrite", "mfuuid",
+            "uuid", "ole32", "dinput8", "dxguid",
+            "d3d11", "d3d12", "dxgi", "d3dcompiler"
+        ])
+    
+    # ===== Linux ================================================================
+    with filter('system:Linux'): 
+        links(['X11', 'pthread']) 
+        defines(['NKENTSEU_PLATFORM_LINUX']) 
+    
+    # ===== Mac ================================================================
+    with filter('system:macOS'): 
+        framework('Cocoa') 
+        defines(['NKENTSEU_PLATFORM_MACOS'])
