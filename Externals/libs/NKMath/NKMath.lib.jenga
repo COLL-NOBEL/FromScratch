@@ -11,7 +11,7 @@ NkRect, NkVec2f, NkVec3f.
 
 from Jenga import *
 
-_TC_WINDOWS = "nk-windows-clang-mingw"
+_TC_WINDOWS = "mingw"
 
 with project("NKMath"):
     staticlib()
