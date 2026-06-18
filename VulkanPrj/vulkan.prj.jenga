@@ -22,14 +22,12 @@ with project("MyVulkanApp"):
     includedirs([
         "src",
         "%{wks.location}/Externals/libs/nkentseu/include",
-        "%{wks.location}/Externals/libs/NKGlad/include",
     ])
-    
+
     links([
         "NKPlatform", "NKCore", "NKMemory", "NKContainers", "NKMath",   # foundation
         "NKTime", "NKLogger", "NKThreading",                            # system
         "NKEvent", "NKWindow", "NKContext",                             # Runtime & Graphics
-        "NKGlad"                                                         # OpenGL Loader
     ])
 
     libdirs([
@@ -47,18 +45,20 @@ with project("MyVulkanApp"):
         ])
 
         links([
-            "user32", "gdi32", "opengl32", "dwmapi", "shell32",
+            "user32", "gdi32", "dwmapi", "shell32",
             "xinput", "mf", "mfplat", "mfreadwrite", "mfuuid",
             "uuid", "ole32", "dinput8", "dxguid",
-            "d3d11", "d3d12", "dxgi", "d3dcompiler"
+            "d3d11", "d3d12", "dxgi", "d3dcompiler",
+            "vulkan-1"
         ])
-    
+
     # ===== Linux ================================================================
-    with filter('system:Linux'): 
-        links(['X11', 'pthread']) 
-        defines(['NKENTSEU_PLATFORM_LINUX']) 
-    
+    with filter('system:Linux'):
+        links(['X11', 'pthread', 'vulkan'])
+        defines(['NKENTSEU_PLATFORM_LINUX'])
+
     # ===== Mac ================================================================
-    with filter('system:macOS'): 
-        framework('Cocoa') 
+    with filter('system:macOS'):
+        framework('Cocoa')
+        links(['vulkan'])
         defines(['NKENTSEU_PLATFORM_MACOS'])
