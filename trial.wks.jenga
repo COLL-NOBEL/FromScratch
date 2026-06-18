@@ -8,15 +8,15 @@ from Jenga import *
 from Jenga.GlobalToolchains import RegisterJengaGlobalToolchains
 
 with workspace("NKWindowTuto", location="."):
-    #RegisterJengaGlobalToolchains()
+    RegisterJengaGlobalToolchains()
 
-    # Nom du toolchain Windows clang-mingw
-    TC_WINDOWS = "nk-windows-clang-mingw"
+    # Nom du toolchain Windows
+    TC_WINDOWS = "mingw"
 
     # Enregistrement du toolchain Windows avec resolution explicite du compilateur
     _clang = shutil.which("clang")                              # Compilateur C
     _clangxx = shutil.which("clang++")                          # compilateur C++
-    _llvm_ar = shutil.which("llvm-ar") or shutil.which("ar")    # editeur de lien    
+    _llvm_ar = shutil.which("llvm-ar") or shutil.which("ar")   # editeur de lien
 
     # Precaution pour la definition de la toolchain
     if not _clang and os.path.exists(r"C:\msys64\ucrt64\bin\clang.exe"):
@@ -32,11 +32,13 @@ with workspace("NKWindowTuto", location="."):
     with toolchain(TC_WINDOWS, "clang"):
         settarget("Windows", "x86_64", "mingw")
         targettriple(r"x86_64-w64-windows-gnu")
+
         ccompiler(_clang or "clang")
         cppcompiler(_clangxx or "clang++")
         linker(_clangxx or "clang++")
         if _llvm_ar:
             archiver(_llvm_ar)
+
         cflags([
             "--target=x86_64-w64-windows-gnu",
             "-DWINVER=0x0601",
@@ -47,7 +49,10 @@ with workspace("NKWindowTuto", location="."):
             "-DWINVER=0x0601",
             "-D_WIN32_WINNT=0x0601",
         ])
-        ldflags(["--target=x86_64-w64-windows-gnu"])
+        ldflags([
+            "--target=x86_64-w64-windows-gnu",
+            "-fuse-ld=lld",
+        ])
 
     configurations(["Debug", "Release"])
 

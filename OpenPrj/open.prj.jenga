@@ -6,8 +6,14 @@ with project("MyOpenGLApp"):
     cppdialect("C++20")
     location(".")
 
-    _TC_WINDOWS = "nk-windows-clang-mingw"
-    usetoolchain(_TC_WINDOWS)
+    _TC_WINDOWS = "mingw"
+
+    with filter("system:Windows"):
+        usetoolchain(_TC_WINDOWS)
+        linkoptions([
+            "--target=x86_64-w64-windows-gnu",
+            "-fuse-ld=lld",
+        ])
 
     files([
         "src/**.cpp",
