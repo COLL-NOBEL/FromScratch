@@ -131,9 +131,7 @@ C:\Users\colli\Desktop\FromSratch\Build\Obj\Debug-Windows\MyOpenGLApp\main.obj: 
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContext\Core\NkOpenGLDesc.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContext\Core\NkWGLPixelFormat.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContext\Core\NkContextInfo.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContext\Core\NkNativeContextAccess.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContext\Graphics\OpenGL\NkOpenGLContextData.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContext\Graphics\DirectX\NkDirectXContextData.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContext\Graphics\Software\NkSoftwareContext.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContext\Core\NkSurfaceDesc.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContext\Graphics\Software\NkSWPixel.h
+  C:\Users\colli\Desktop\FromSratch\OpenPrj\src\engine\Renderer.h \
+  C:\Users\colli\Desktop\FromSratch\OpenPrj\src\engine\ShaderProgram.h \
+  C:\Users\colli\Desktop\FromSratch\OpenPrj\src\engine\SimpleMesh.h
