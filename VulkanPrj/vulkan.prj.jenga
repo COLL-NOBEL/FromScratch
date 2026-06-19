@@ -2,47 +2,14 @@ from Jenga import *
 import os
 import re
 
-
-def _discover_vulkan_sdk_root():
-    vulkan_sdk = os.environ.get("VULKAN_SDK")
-    if vulkan_sdk:
-        return os.path.normpath(vulkan_sdk.strip().strip('"'))
-
-    path_value = os.environ.get("PATH", "")
-    path_entries = path_value.split(";") if ";" in path_value else path_value.split(os.pathsep)
-
-    for path_entry in path_entries:
-        entry = path_entry.strip().strip('"')
-        if not entry:
-            continue
-
-        normalized = entry.replace("\\", "/").rstrip("/")
-        match = re.search(r"(?i)(.+/VulkanSDK/[^/]+)/Bin$", normalized)
-        if match:
-            return os.path.normpath(match.group(1))
-
-    return None
-
-
-_VULKAN_SDK_ROOT = _discover_vulkan_sdk_root()
-_VULKAN_INCLUDE_DIR = os.path.join(_VULKAN_SDK_ROOT, "Include") if _VULKAN_SDK_ROOT else None
-_VULKAN_LIB_DIR = os.path.join(_VULKAN_SDK_ROOT, "Lib") if _VULKAN_SDK_ROOT else None
-_VULKAN_LIB_FILE = os.path.join(_VULKAN_LIB_DIR, "vulkan-1.lib") if _VULKAN_LIB_DIR else None
-
-with project("MyVulkanApp"):
+with project("VKGraphicsEngine"):
     windowedapp()
     language("C++")
     cppdialect("C++20")
     location(".")
 
     _TC_WINDOWS = "mingw"
-
-    with filter("system:Windows"):
-        usetoolchain(_TC_WINDOWS)
-        linkoptions([
-            "--target=x86_64-w64-windows-gnu",
-            "-fuse-ld=lld",
-        ])
+    usetoolchain(_TC_WINDOWS)
 
     files([
         "src/**.cpp",
@@ -51,6 +18,7 @@ with project("MyVulkanApp"):
     includedirs([
         "src",
         "%{wks.location}/Externals/libs/nkentseu/include",
+        "C:\\VulkanSDK\\1.4.341.0\\Include",
     ])
 
     links([
@@ -61,6 +29,7 @@ with project("MyVulkanApp"):
 
     libdirs([
         "%{wks.location}/Externals/libs/nkentseu/lib",
+        "C:\\VulkanSDK\\1.4.341.0\\Lib",
     ])
 
     objdir("%{wks.location}/Build/Obj/%{cfg.buildcfg}-%{cfg.system}/%{prj.name}")
@@ -74,19 +43,19 @@ with project("MyVulkanApp"):
         ])
 
         links([
-            "user32", "gdi32", "dwmapi", "shell32",
+            "user32", "gdi32", "dwmapi", "shell32", "opengl32",
             "xinput", "mf", "mfplat", "mfreadwrite", "mfuuid",
             "uuid", "ole32", "dinput8", "dxguid",
             "d3d11", "d3d12", "dxgi", "d3dcompiler",
             "vulkan-1"
         ])
 
-        if _VULKAN_SDK_ROOT:
-            includedirs([_VULKAN_INCLUDE_DIR])
-            libdirs([_VULKAN_LIB_DIR])
+        # if _VULKAN_SDK_ROOT:
+        #     includedirs([_VULKAN_INCLUDE_DIR])
+        #     libdirs([_VULKAN_LIB_DIR])
 
-        if _VULKAN_LIB_FILE and os.path.isfile(_VULKAN_LIB_FILE):
-            linkoptions([_VULKAN_LIB_FILE])
+        # if _VULKAN_LIB_FILE and os.path.isfile(_VULKAN_LIB_FILE):
+        #     linkoptions([_VULKAN_LIB_FILE])
 
     # ===== Linux ================================================================
     with filter('system:Linux'):
