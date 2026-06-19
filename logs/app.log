@@ -64,3 +64,22 @@
 [2026-06-19 19:55:25.932] [INF] [default] [main.cpp:87 in nkmain] -> [NkVulkan] Validation layers enabled
 [2026-06-19 19:55:26.048] [INF] [default] [main.cpp:103 in nkmain] -> [NkVulkan] VkInstance created successfully!
 [2026-06-19 19:55:51.182] [INF] [default] [main.cpp:139 in nkmain] -> [NkVulkan] VkInstance destroyed
+[2026-06-19 20:01:11.298] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-19 20:01:11.302] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-19 20:01:11.302] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=000001e0ca422ce0
+[2026-06-19 20:01:11.302] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-19 20:01:11.302] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-19 20:01:11.302] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-19 20:01:11.302] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-19 20:01:11.304] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-19 20:01:11.394] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 4.6 Core)
+
+[2026-06-19 20:01:11.394] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 4.6.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-19 20:01:11.394] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-19 20:01:11.394] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-19 20:01:11.394] [INF] [default] [main.cpp:47 in LoadGL] -> [OpenGL] OpenGL 4.6.0 - Build 31.0.101.2130  GLSL 4.60 - Build 31.0.101.2130
+
+[2026-06-19 20:02:23.946] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
