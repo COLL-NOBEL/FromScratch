@@ -83,3 +83,6 @@
 
 [2026-06-19 20:02:23.946] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
 
+[2026-06-19 20:39:49.421] [INF] [default] [main.cpp:87 in nkmain] -> [NkVulkan] Validation layers enabled
+[2026-06-19 20:39:49.527] [INF] [default] [main.cpp:103 in nkmain] -> [NkVulkan] VkInstance created successfully!
+[2026-06-19 20:40:04.215] [INF] [default] [main.cpp:139 in nkmain] -> [NkVulkan] VkInstance destroyed
