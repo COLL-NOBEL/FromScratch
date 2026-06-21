@@ -25,6 +25,7 @@ bool VulkanContext::Initialize(nkentseu::NkWindow& window, const VulkanContextCr
     mCamera.up = NkVec3<float>(0.0f, 1.0f, 0.0f).Normalize();
     mCamera.yawRadians = NkMathUtils::deg2rad(-90.0f);
     mCamera.pitchRadians = NkMathUtils::deg2rad(-12.0f);
+    mCameraAnimationTimeSeconds = 0.0f;
 
     RebuildViewMatrix();
 
@@ -57,11 +58,17 @@ void VulkanContext::Update(float deltaSeconds) {
 
     const float dt = NkMathUtils::clamp(deltaSeconds, 0.0f, 0.1f);
 
-    mCamera.yawRadians += NkMathUtils::deg2rad(20.0f) * dt;
+    mCameraAnimationTimeSeconds += dt;
 
-    const float pitchSwing = std::sin(mCamera.yawRadians * 0.5f) * NkMathUtils::deg2rad(6.0f);
+    const float baseYaw = NkMathUtils::deg2rad(-90.0f);
+    const float basePitch = NkMathUtils::deg2rad(-12.0f);
+
+    const float yawSwing = std::sin(mCameraAnimationTimeSeconds * 0.55f) * NkMathUtils::deg2rad(10.0f);
+    const float pitchSwing = std::sin(mCameraAnimationTimeSeconds * 0.85f) * NkMathUtils::deg2rad(4.0f);
+
+    mCamera.yawRadians = baseYaw + yawSwing;
     mCamera.pitchRadians = NkMathUtils::clamp(
-        pitchSwing,
+        basePitch + pitchSwing,
         NkMathUtils::deg2rad(-30.0f),
         NkMathUtils::deg2rad(30.0f)
     );

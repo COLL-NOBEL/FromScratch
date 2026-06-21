@@ -58,6 +58,7 @@ private:
     VulkanInstance mInstance;
     VulkanRenderer mRenderer;
     CameraState mCamera;
+    float mCameraAnimationTimeSeconds = 0.0f;
 };
 
 } // namespace graphics::vulkan

@@ -1447,18 +1447,23 @@ void VulkanRenderer::MatrixToColumnMajorArray(const NkMat4x4<float>& matrix, flo
 }
 
 NkMat4x4<float> VulkanRenderer::BuildCubeModelMatrix(float sceneTimeSeconds, uint32_t instanceIndex) {
-    const float primaryRotation = sceneTimeSeconds * NkMathUtils::deg2rad(55.0f);
-    const float secondaryRotation = sceneTimeSeconds * NkMathUtils::deg2rad(40.0f);
+    const float phaseOffset = (instanceIndex == 0) ? 0.0f : 1.7f;
+    const float orbitSpeed = (instanceIndex == 0) ? 1.05f : 0.8f;
+    const float spinSpeedY = (instanceIndex == 0) ? 58.0f : 42.0f;
+    const float spinSpeedX = (instanceIndex == 0) ? 28.0f : 36.0f;
 
-    if (instanceIndex == 0) {
-        return NkMat4x4<float>::Translation(-1.1f, 0.0f, 0.0f)
-             * NkMat4x4<float>::RotationY(primaryRotation);
-    }
+    const float x = std::sin(sceneTimeSeconds * orbitSpeed + phaseOffset) * 0.9f;
+    const float y = std::sin(sceneTimeSeconds * (orbitSpeed * 1.35f) + phaseOffset) * 0.45f;
+    const float z = -0.45f + std::cos(sceneTimeSeconds * (orbitSpeed * 0.7f) + phaseOffset) * 0.4f;
 
-    return NkMat4x4<float>::Translation(1.1f, 0.3f, -0.7f)
-         * NkMat4x4<float>::RotationX(secondaryRotation)
-         * NkMat4x4<float>::RotationY(primaryRotation)
-         * NkMat4x4<float>::Scale(0.75f, 0.75f, 0.75f);
+    const float rotationY = sceneTimeSeconds * NkMathUtils::deg2rad(spinSpeedY);
+    const float rotationX = sceneTimeSeconds * NkMathUtils::deg2rad(spinSpeedX);
+    const float scale = (instanceIndex == 0) ? 1.0f : 0.78f;
+
+    return NkMat4x4<float>::Translation(x, y, z)
+         * NkMat4x4<float>::RotationY(rotationY)
+         * NkMat4x4<float>::RotationX(rotationX)
+         * NkMat4x4<float>::Scale(scale, scale, scale);
 }
 
 } // namespace graphics::vulkan
