@@ -8,6 +8,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cmath>
 #include <cstring>
 #include <limits>
 #include <set>
@@ -78,14 +79,14 @@ VkShaderModule CreateShaderModule(VkDevice device, const uint32_t* code, size_t 
 }
 
 const std::array<VulkanRenderer::Vertex, 8> kCubeVertices = {{
-    {{-0.5f, -0.5f, -0.5f}, {1.0f, 0.2f, 0.2f}},
-    {{ 0.5f, -0.5f, -0.5f}, {0.2f, 1.0f, 0.2f}},
-    {{ 0.5f,  0.5f, -0.5f}, {0.2f, 0.2f, 1.0f}},
-    {{-0.5f,  0.5f, -0.5f}, {1.0f, 1.0f, 0.2f}},
-    {{-0.5f, -0.5f,  0.5f}, {1.0f, 0.2f, 1.0f}},
-    {{ 0.5f, -0.5f,  0.5f}, {0.2f, 1.0f, 1.0f}},
-    {{ 0.5f,  0.5f,  0.5f}, {1.0f, 0.8f, 0.2f}},
-    {{-0.5f,  0.5f,  0.5f}, {0.8f, 0.8f, 0.8f}},
+    {{-0.5f, -0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
+    {{ 0.5f, -0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
+    {{ 0.5f,  0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
+    {{-0.5f,  0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
+    {{-0.5f, -0.5f,  0.5f}, {0.0f, 1.0f, 0.0f}},
+    {{ 0.5f, -0.5f,  0.5f}, {0.0f, 1.0f, 0.0f}},
+    {{ 0.5f,  0.5f,  0.5f}, {0.0f, 1.0f, 0.0f}},
+    {{-0.5f,  0.5f,  0.5f}, {0.0f, 1.0f, 0.0f}},
 }};
 
 const std::array<uint32_t, 36> kCubeIndices = {{
@@ -223,6 +224,11 @@ void VulkanRenderer::Render(
         return;
     }
 
+    if (imageIndex >= mRenderFinishedSemaphores.size()) {
+        logger.Error("[NkVulkan] Render synchronization state is out of sync with swapchain images");
+        return;
+    }
+
     vkResetFences(mDevice, 1, &mInFlightFences[mCurrentFrame]);
 
     vkResetCommandBuffer(mCommandBuffers[mCurrentFrame], 0);
@@ -236,7 +242,7 @@ void VulkanRenderer::Render(
 
     VkSemaphore waitSemaphores[] = {mImageAvailableSemaphores[mCurrentFrame]};
     VkPipelineStageFlags waitStages[] = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
-    VkSemaphore signalSemaphores[] = {mRenderFinishedSemaphores[mCurrentFrame]};
+    VkSemaphore signalSemaphores[] = {mRenderFinishedSemaphores[imageIndex]};
 
     VkSubmitInfo submitInfo{};
     submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
@@ -298,11 +304,6 @@ void VulkanRenderer::Shutdown() {
         if (mImageAvailableSemaphores[i] != VK_NULL_HANDLE) {
             vkDestroySemaphore(mDevice, mImageAvailableSemaphores[i], nullptr);
             mImageAvailableSemaphores[i] = VK_NULL_HANDLE;
-        }
-
-        if (mRenderFinishedSemaphores[i] != VK_NULL_HANDLE) {
-            vkDestroySemaphore(mDevice, mRenderFinishedSemaphores[i], nullptr);
-            mRenderFinishedSemaphores[i] = VK_NULL_HANDLE;
         }
 
         if (mInFlightFences[i] != VK_NULL_HANDLE) {
@@ -1027,6 +1028,11 @@ bool VulkanRenderer::CreateCommandBuffers() {
 }
 
 bool VulkanRenderer::CreateSyncObjects() {
+    if (mSwapchainImages.empty()) {
+        logger.Error("[NkVulkan] Cannot create synchronization objects without swapchain images");
+        return false;
+    }
+
     VkSemaphoreCreateInfo semaphoreInfo{};
     semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
 
@@ -1035,10 +1041,33 @@ bool VulkanRenderer::CreateSyncObjects() {
     fenceInfo.flags = VK_FENCE_CREATE_SIGNALED_BIT;
 
     for (uint32_t i = 0; i < kMaxFramesInFlight; ++i) {
-        if (vkCreateSemaphore(mDevice, &semaphoreInfo, nullptr, &mImageAvailableSemaphores[i]) != VK_SUCCESS ||
-            vkCreateSemaphore(mDevice, &semaphoreInfo, nullptr, &mRenderFinishedSemaphores[i]) != VK_SUCCESS ||
-            vkCreateFence(mDevice, &fenceInfo, nullptr, &mInFlightFences[i]) != VK_SUCCESS) {
+        if ((mImageAvailableSemaphores[i] == VK_NULL_HANDLE &&
+             vkCreateSemaphore(mDevice, &semaphoreInfo, nullptr, &mImageAvailableSemaphores[i]) != VK_SUCCESS) ||
+            (mInFlightFences[i] == VK_NULL_HANDLE &&
+             vkCreateFence(mDevice, &fenceInfo, nullptr, &mInFlightFences[i]) != VK_SUCCESS)) {
             logger.Error("[NkVulkan] Failed to create synchronization objects");
+            return false;
+        }
+    }
+
+    for (VkSemaphore semaphore : mRenderFinishedSemaphores) {
+        if (semaphore != VK_NULL_HANDLE) {
+            vkDestroySemaphore(mDevice, semaphore, nullptr);
+        }
+    }
+
+    mRenderFinishedSemaphores.assign(mSwapchainImages.size(), VK_NULL_HANDLE);
+
+    for (VkSemaphore& semaphore : mRenderFinishedSemaphores) {
+        if (vkCreateSemaphore(mDevice, &semaphoreInfo, nullptr, &semaphore) != VK_SUCCESS) {
+            logger.Error("[NkVulkan] Failed to create render-finished semaphore for swapchain image");
+            for (VkSemaphore& createdSemaphore : mRenderFinishedSemaphores) {
+                if (createdSemaphore != VK_NULL_HANDLE) {
+                    vkDestroySemaphore(mDevice, createdSemaphore, nullptr);
+                    createdSemaphore = VK_NULL_HANDLE;
+                }
+            }
+            mRenderFinishedSemaphores.clear();
             return false;
         }
     }
@@ -1059,7 +1088,8 @@ bool VulkanRenderer::RecreateSwapchain(uint32_t windowWidth, uint32_t windowHeig
         !CreateRenderPass() ||
         !CreateGraphicsPipeline() ||
         !CreateDepthResources() ||
-        !CreateFramebuffers()) {
+        !CreateFramebuffers() ||
+        !CreateSyncObjects()) {
         logger.Error("[NkVulkan] Swapchain recreation failed");
         return false;
     }
@@ -1068,6 +1098,13 @@ bool VulkanRenderer::RecreateSwapchain(uint32_t windowWidth, uint32_t windowHeig
 }
 
 void VulkanRenderer::CleanupSwapchain() {
+    for (VkSemaphore semaphore : mRenderFinishedSemaphores) {
+        if (semaphore != VK_NULL_HANDLE && mDevice != VK_NULL_HANDLE) {
+            vkDestroySemaphore(mDevice, semaphore, nullptr);
+        }
+    }
+    mRenderFinishedSemaphores.clear();
+
     for (VkFramebuffer framebuffer : mSwapchainFramebuffers) {
         if (framebuffer != VK_NULL_HANDLE && mDevice != VK_NULL_HANDLE) {
             vkDestroyFramebuffer(mDevice, framebuffer, nullptr);
@@ -1149,24 +1186,22 @@ void VulkanRenderer::RecordCommandBuffer(
     vkCmdBindVertexBuffers(commandBuffer, 0, 1, &mCubeMesh.vertexBuffer, offsets);
     vkCmdBindIndexBuffer(commandBuffer, mCubeMesh.indexBuffer, 0, VK_INDEX_TYPE_UINT32);
 
-    for (uint32_t instance = 0; instance < 2; ++instance) {
-        const NkMat4x4<float> modelMatrix = BuildCubeModelMatrix(sceneTimeSeconds, instance);
-        const NkMat4x4<float> mvp = projectionMatrix * viewMatrix * modelMatrix;
+    const NkMat4x4<float> modelMatrix = BuildCubeModelMatrix(sceneTimeSeconds);
+    const NkMat4x4<float> mvp = projectionMatrix * viewMatrix * modelMatrix;
 
-        PushConstants push{};
-        MatrixToColumnMajorArray(mvp, push.mvp);
+    PushConstants push{};
+    MatrixToColumnMajorArray(mvp, push.mvp);
 
-        vkCmdPushConstants(
-            commandBuffer,
-            mPipelineLayout,
-            VK_SHADER_STAGE_VERTEX_BIT,
-            0,
-            sizeof(PushConstants),
-            &push
-        );
+    vkCmdPushConstants(
+        commandBuffer,
+        mPipelineLayout,
+        VK_SHADER_STAGE_VERTEX_BIT,
+        0,
+        sizeof(PushConstants),
+        &push
+    );
 
-        vkCmdDrawIndexed(commandBuffer, mCubeMesh.indexCount, 1, 0, 0, 0);
-    }
+    vkCmdDrawIndexed(commandBuffer, mCubeMesh.indexCount, 1, 0, 0, 0);
 
     vkCmdEndRenderPass(commandBuffer);
     vkEndCommandBuffer(commandBuffer);
@@ -1446,24 +1481,21 @@ void VulkanRenderer::MatrixToColumnMajorArray(const NkMat4x4<float>& matrix, flo
     }
 }
 
-NkMat4x4<float> VulkanRenderer::BuildCubeModelMatrix(float sceneTimeSeconds, uint32_t instanceIndex) {
-    const float phaseOffset = (instanceIndex == 0) ? 0.0f : 1.7f;
-    const float orbitSpeed = (instanceIndex == 0) ? 1.05f : 0.8f;
-    const float spinSpeedY = (instanceIndex == 0) ? 58.0f : 42.0f;
-    const float spinSpeedX = (instanceIndex == 0) ? 28.0f : 36.0f;
+NkMat4x4<float> VulkanRenderer::BuildCubeModelMatrix(float sceneTimeSeconds) {
+    const float orbitRadians = sceneTimeSeconds * 0.9f;
+    const float orbitRadiusX = 0.95f;
+    const float orbitRadiusY = 0.55f;
 
-    const float x = std::sin(sceneTimeSeconds * orbitSpeed + phaseOffset) * 0.9f;
-    const float y = std::sin(sceneTimeSeconds * (orbitSpeed * 1.35f) + phaseOffset) * 0.45f;
-    const float z = -0.45f + std::cos(sceneTimeSeconds * (orbitSpeed * 0.7f) + phaseOffset) * 0.4f;
+    const float x = std::cos(orbitRadians) * orbitRadiusX;
+    const float y = std::sin(orbitRadians) * orbitRadiusY;
+    const float z = -0.35f;
 
-    const float rotationY = sceneTimeSeconds * NkMathUtils::deg2rad(spinSpeedY);
-    const float rotationX = sceneTimeSeconds * NkMathUtils::deg2rad(spinSpeedX);
-    const float scale = (instanceIndex == 0) ? 1.0f : 0.78f;
+    const float rotationY = sceneTimeSeconds * NkMathUtils::deg2rad(90.0f);
+    const float rotationX = sceneTimeSeconds * NkMathUtils::deg2rad(55.0f);
 
     return NkMat4x4<float>::Translation(x, y, z)
          * NkMat4x4<float>::RotationY(rotationY)
-         * NkMat4x4<float>::RotationX(rotationX)
-         * NkMat4x4<float>::Scale(scale, scale, scale);
+         * NkMat4x4<float>::RotationX(rotationX);
 }
 
 } // namespace graphics::vulkan

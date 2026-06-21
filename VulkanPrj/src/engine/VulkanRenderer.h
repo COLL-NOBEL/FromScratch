@@ -139,7 +139,7 @@ private:
     void DestroyImage(VkImage& image, VkDeviceMemory& memory, VkImageView& imageView);
 
     static void MatrixToColumnMajorArray(const NkMat4x4<float>& matrix, float out[16]);
-    static NkMat4x4<float> BuildCubeModelMatrix(float sceneTimeSeconds, uint32_t instanceIndex);
+    static NkMat4x4<float> BuildCubeModelMatrix(float sceneTimeSeconds);
 
     VkInstance mInstance = VK_NULL_HANDLE;
     VkSurfaceKHR mSurface = VK_NULL_HANDLE;
@@ -172,7 +172,7 @@ private:
     std::vector<VkCommandBuffer> mCommandBuffers;
 
     std::array<VkSemaphore, kMaxFramesInFlight> mImageAvailableSemaphores{};
-    std::array<VkSemaphore, kMaxFramesInFlight> mRenderFinishedSemaphores{};
+    std::vector<VkSemaphore> mRenderFinishedSemaphores;
     std::array<VkFence, kMaxFramesInFlight> mInFlightFences{};
 
     uint32_t mCurrentFrame = 0;
