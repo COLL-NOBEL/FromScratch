@@ -1,26 +1,22 @@
-C:\Users\colli\Desktop\FromSratch\Build\Obj\Debug-Windows\VKGraphicsEngine\main.obj: \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\main.cpp \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\NkWindow.h \
+C:\Users\colli\Desktop\FromSratch\Build\Obj\Debug-Windows\Apps\Apps.obj: \
+  C:\Users\colli\Desktop\FromSratch\2DEngine\src\apps\Apps.cpp \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkMain.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKPlatform\NkPlatformDetect.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkTypes.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NKMath.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkFunctions.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkEntry.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkTraits.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkTypes.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKPlatform\NkArchDetect.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkInline.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKPlatform\NkCompilerDetect.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkAngle.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkLegacySystem.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkExport.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\String\NkFormat.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\NkCompat.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\String\NkStringUtils.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\String\NkString.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\NkCompat.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\String\NkStringView.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkExport.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKPlatform\NkCompilerDetect.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkInline.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkFunction.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkAllocator.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkExport.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkUtils.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkTraits.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\Assert\NkAssert.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\Assert\NkAssertion.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\Assert\NkAssertHandler.h \
@@ -31,7 +27,31 @@ C:\Users\colli\Desktop\FromSratch\Build\Obj\Debug-Windows\VKGraphicsEngine\main.
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkVersion.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkMacros.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkCGXDetect.h \
-  C:\VulkanSDK\1.4.341.0\Include\vulkan\vulkan.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\String\NkStringFormat.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\Sequential\NkVector.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\NkContainersExport.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\Iterators\NkIterator.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\Iterators\NkInitializerList.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\Sequential\NkVectorError.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkMemory.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkContainerAllocator.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkAtomic.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkGc.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkHash.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkIntrusivePtr.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkProfiler.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkSharedPtr.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkTracker.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkTag.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKPlatform\NkFoundationLog.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkUniquePtr.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSystem.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkTypes.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NKMath.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkFunctions.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkAngle.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkLegacySystem.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\String\NkFormat.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkEulerAngle.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkVec.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkMat.h \
@@ -43,25 +63,11 @@ C:\Users\colli\Desktop\FromSratch\Build\Obj\Debug-Windows\VKGraphicsEngine\main.
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkRectangle.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkSegment.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkRendererApi.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\String\NkStringUtils.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\String\NkStringFormat.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkWindowConfig.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSafeArea.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSurfaceHint.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\CacheFriendly\NkArray.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\Iterators\NkIterator.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\NkContainersExport.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSurface.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkContext.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSystem.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKEvent\NkWindowId.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKEvent\NkEventSystem.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKEvent\NkEvent.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\NkContainers.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\Heterogeneous\NkPair.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\Iterators\NkInitializerList.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\Sequential\NkVectorError.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\Sequential\NkVector.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\Associative\NkMap.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\Associative\NkBTree.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\String\NkFormatf.h \
@@ -88,9 +94,6 @@ C:\Users\colli\Desktop\FromSratch\Build\Obj\Debug-Windows\VKGraphicsEngine\main.
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKLogger\NkSink.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKLogger\NkLogMessage.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKLogger\NkFormatter.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkUniquePtr.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkSharedPtr.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkAtomic.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKLogger\NkTextFormat.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKLogger\NkSync.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKThreading\NkMutex.h \
@@ -103,44 +106,17 @@ C:\Users\colli\Desktop\FromSratch\Build\Obj\Debug-Windows\VKGraphicsEngine\main.
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKTime\NkDuration.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKEvent\NkGamepadSystem.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKEvent\NkGamepadMappingPersistence.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\CacheFriendly\NkArray.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSurface.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSurfaceHint.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\EntryPoints\NkWindowsDesktop.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\NkWindow.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkWindowConfig.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSafeArea.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkContext.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkEvent.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKEvent\NkDropSystem.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKEvent\NkEventDispatcher.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkWindow.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Platform\Win32\NkWin32Window.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkDialogs.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkEntry.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkMemory.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkContainerAllocator.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkGc.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkHash.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkIntrusivePtr.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkProfiler.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkTracker.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkTag.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKPlatform\NkFoundationLog.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkMain.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\EntryPoints\NkWindowsDesktop.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanEngine.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanContext.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanInstance.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanCommon.h \
-  C:\VulkanSDK\1.4.341.0\Include\vulkan\vk_platform.h \
-  C:\VulkanSDK\1.4.341.0\Include\vulkan\vulkan_core.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h264std.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codecs_common.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h264std_encode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h265std.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h265std_encode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h264std_decode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h265std_decode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_av1std.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_av1std_decode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_av1std_encode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_vp9std.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_vp9std_decode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vulkan\vulkan_win32.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanRenderer.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\..\..\nkMath\NkMat4x4.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\..\..\nkMath\NkVec3.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\..\nkMath\NkMathUtils.h
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkDialogs.h

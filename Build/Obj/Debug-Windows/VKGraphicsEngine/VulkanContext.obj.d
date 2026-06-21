@@ -1,7 +1,28 @@
-C:\Users\colli\Desktop\FromSratch\Build\Obj\Debug-Windows\VKGraphicsEngine\main.obj: \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\main.cpp \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\NkWindow.h \
+C:\Users\colli\Desktop\FromSratch\Build\Obj\Debug-Windows\VKGraphicsEngine\VulkanContext.obj: \
+  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanContext.cpp \
+  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanContext.h \
+  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanInstance.h \
+  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanCommon.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKPlatform\NkPlatformDetect.h \
+  C:\VulkanSDK\1.4.341.0\Include\vulkan\vulkan.h \
+  C:\VulkanSDK\1.4.341.0\Include\vulkan\vk_platform.h \
+  C:\VulkanSDK\1.4.341.0\Include\vulkan\vulkan_core.h \
+  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h264std.h \
+  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codecs_common.h \
+  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h264std_encode.h \
+  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h265std.h \
+  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h265std_encode.h \
+  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h264std_decode.h \
+  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h265std_decode.h \
+  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_av1std.h \
+  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_av1std_decode.h \
+  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_av1std_encode.h \
+  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_vp9std.h \
+  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_vp9std_decode.h \
+  C:\VulkanSDK\1.4.341.0\Include\vulkan\vulkan_win32.h \
+  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanRenderer.h \
+  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\..\..\nkMath\NkMat4x4.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSurface.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkTypes.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NKMath.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkFunctions.h \
@@ -31,7 +52,6 @@ C:\Users\colli\Desktop\FromSratch\Build\Obj\Debug-Windows\VKGraphicsEngine\main.
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkVersion.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkMacros.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkCGXDetect.h \
-  C:\VulkanSDK\1.4.341.0\Include\vulkan\vulkan.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkEulerAngle.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkVec.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMath\NkMat.h \
@@ -45,13 +65,15 @@ C:\Users\colli\Desktop\FromSratch\Build\Obj\Debug-Windows\VKGraphicsEngine\main.
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKCore\NkRendererApi.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\String\NkStringUtils.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\String\NkStringFormat.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkWindowConfig.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSafeArea.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSurfaceHint.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\CacheFriendly\NkArray.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\Iterators\NkIterator.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKContainers\NkContainersExport.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSurface.h \
+  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\..\..\nkMath\NkVec3.h \
+  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\..\..\nkMath\NkMathUtils.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\NkWindow.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkWindowConfig.h \
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSafeArea.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkContext.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkSystem.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKEvent\NkWindowId.h \
@@ -118,29 +140,4 @@ C:\Users\colli\Desktop\FromSratch\Build\Obj\Debug-Windows\VKGraphicsEngine\main.
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkProfiler.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkTracker.h \
   C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKMemory\NkTag.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKPlatform\NkFoundationLog.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\Core\NkMain.h \
-  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKWindow\EntryPoints\NkWindowsDesktop.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanEngine.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanContext.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanInstance.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanCommon.h \
-  C:\VulkanSDK\1.4.341.0\Include\vulkan\vk_platform.h \
-  C:\VulkanSDK\1.4.341.0\Include\vulkan\vulkan_core.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h264std.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codecs_common.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h264std_encode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h265std.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h265std_encode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h264std_decode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_h265std_decode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_av1std.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_av1std_decode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_av1std_encode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_vp9std.h \
-  C:\VulkanSDK\1.4.341.0\Include\vk_video\vulkan_video_codec_vp9std_decode.h \
-  C:\VulkanSDK\1.4.341.0\Include\vulkan\vulkan_win32.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\VulkanRenderer.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\..\..\nkMath\NkMat4x4.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\engine\..\..\nkMath\NkVec3.h \
-  C:\Users\colli\Desktop\FromSratch\VulkanPrj\src\..\nkMath\NkMathUtils.h
+  C:\Users\colli\Desktop\FromSratch\Externals\libs\nkentseu\include\NKPlatform\NkFoundationLog.h

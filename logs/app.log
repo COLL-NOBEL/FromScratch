@@ -86,3 +86,17 @@
 [2026-06-19 20:39:49.421] [INF] [default] [main.cpp:87 in nkmain] -> [NkVulkan] Validation layers enabled
 [2026-06-19 20:39:49.527] [INF] [default] [main.cpp:103 in nkmain] -> [NkVulkan] VkInstance created successfully!
 [2026-06-19 20:40:04.215] [INF] [default] [main.cpp:139 in nkmain] -> [NkVulkan] VkInstance destroyed
+[2026-06-21 11:03:56.510] [INF] [default] [VulkanInstance.cpp:79 in Create] -> [NkVulkan] Validation layer enabled
+
+[2026-06-21 11:03:56.597] [INF] [default] [VulkanInstance.cpp:119 in Create] -> [NkVulkan] VkInstance created (API 1.2.0)
+
+[2026-06-21 11:03:56.607] [INF] [default] [VulkanRenderer.cpp:469 in PickPhysicalDevice] -> [NkVulkan] Using GPU: Intel(R) HD Graphics 630
+
+[2026-06-21 11:03:56.771] [INF] [default] [VulkanRenderer.cpp:181 in Initialize] -> [NkVulkan] Vulkan renderer initialized with swapchain and graphics pipeline
+
+[2026-06-21 11:03:56.771] [INF] [default] [VulkanEngine.cpp:17 in Initialize] -> [NkVulkan] Vulkan graphics engine initialized (instance=0000023cb012f7e0)
+
+[2026-06-21 11:04:45.157] [INF] [default] [VulkanInstance.cpp:133 in Destroy] -> [NkVulkan] VkInstance destroyed
+
+[2026-06-21 11:04:45.157] [INF] [default] [VulkanEngine.cpp:41 in Shutdown] -> [NkVulkan] Engine shutdown after 48.23 seconds
+
