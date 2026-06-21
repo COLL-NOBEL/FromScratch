@@ -2,11 +2,15 @@
 
 #include "../../nkMath/NkMathUtils.h"
 
+#include "NKWindow/NkWindow.h"
+
 #include <cmath>
 
 namespace graphics::vulkan {
 
-bool VulkanContext::Initialize(const VulkanContextCreateInfo& createInfo) {
+bool VulkanContext::Initialize(nkentseu::NkWindow& window, const VulkanContextCreateInfo& createInfo) {
+    mWindow = &window;
+
     VulkanInstanceConfig instanceConfig{};
     instanceConfig.applicationName = createInfo.applicationName;
     instanceConfig.engineName = createInfo.engineName;
@@ -23,17 +27,36 @@ bool VulkanContext::Initialize(const VulkanContextCreateInfo& createInfo) {
     mCamera.pitchRadians = NkMathUtils::deg2rad(-12.0f);
 
     RebuildViewMatrix();
+
+    const auto windowSize = mWindow->GetSize();
+    const float aspectRatio =
+        (windowSize.height > 0)
+            ? static_cast<float>(windowSize.width) / static_cast<float>(windowSize.height)
+            : 16.0f / 9.0f;
+
+    RebuildProjectionMatrix(aspectRatio);
+
+    if (!mRenderer.Initialize(
+            mInstance.GetHandle(),
+            mWindow->GetSurfaceDesc(),
+            windowSize.width,
+            windowSize.height
+        )) {
+        mInstance.Destroy();
+        mWindow = nullptr;
+        return false;
+    }
+
     return true;
 }
 
 void VulkanContext::Update(float deltaSeconds) {
-    if (!mInstance.IsValid()) {
+    if (!IsInitialized()) {
         return;
     }
 
     const float dt = NkMathUtils::clamp(deltaSeconds, 0.0f, 0.1f);
 
-    // Minimal animated camera state to actively use nkMath vectors/matrices.
     mCamera.yawRadians += NkMathUtils::deg2rad(20.0f) * dt;
 
     const float pitchSwing = std::sin(mCamera.yawRadians * 0.5f) * NkMathUtils::deg2rad(6.0f);
@@ -44,10 +67,36 @@ void VulkanContext::Update(float deltaSeconds) {
     );
 
     RebuildViewMatrix();
+
+    if (mWindow != nullptr) {
+        const auto windowSize = mWindow->GetSize();
+        if (windowSize.width > 0 && windowSize.height > 0) {
+            const float aspectRatio = static_cast<float>(windowSize.width) / static_cast<float>(windowSize.height);
+            RebuildProjectionMatrix(aspectRatio);
+        }
+    }
+}
+
+void VulkanContext::RenderFrame(float sceneTimeSeconds) {
+    if (!IsInitialized() || mWindow == nullptr) {
+        return;
+    }
+
+    const auto windowSize = mWindow->GetSize();
+
+    mRenderer.Render(
+        sceneTimeSeconds,
+        mCamera.viewMatrix,
+        mCamera.projectionMatrix,
+        windowSize.width,
+        windowSize.height
+    );
 }
 
 void VulkanContext::Shutdown() {
+    mRenderer.Shutdown();
     mInstance.Destroy();
+    mWindow = nullptr;
 }
 
 void VulkanContext::RebuildViewMatrix() {
@@ -72,6 +121,24 @@ void VulkanContext::RebuildViewMatrix() {
     );
 
     mCamera.viewMatrix = rotation * translation;
+}
+
+void VulkanContext::RebuildProjectionMatrix(float aspectRatio) {
+    const float safeAspectRatio = aspectRatio > 0.001f ? aspectRatio : (16.0f / 9.0f);
+    const float tanHalfFov = std::tan(mCamera.verticalFovRadians * 0.5f);
+
+    const float yScale = (tanHalfFov > 0.0001f) ? (1.0f / tanHalfFov) : 1.0f;
+    const float xScale = yScale / safeAspectRatio;
+
+    const float nearPlane = mCamera.nearClip;
+    const float farPlane = mCamera.farClip;
+
+    mCamera.projectionMatrix = NkMat4x4<float>(
+        xScale, 0.0f, 0.0f, 0.0f,
+        0.0f, -yScale, 0.0f, 0.0f,
+        0.0f, 0.0f, farPlane / (nearPlane - farPlane), (farPlane * nearPlane) / (nearPlane - farPlane),
+        0.0f, 0.0f, -1.0f, 0.0f
+    );
 }
 
 } // namespace graphics::vulkan

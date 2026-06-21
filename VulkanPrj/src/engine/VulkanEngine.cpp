@@ -4,10 +4,10 @@
 
 namespace graphics::vulkan {
 
-bool VulkanEngine::Initialize() {
+bool VulkanEngine::Initialize(nkentseu::NkWindow& window) {
     VulkanContextCreateInfo contextInfo{};
 
-    if (!mContext.Initialize(contextInfo)) {
+    if (!mContext.Initialize(window, contextInfo)) {
         logger.Error("[NkVulkan] VulkanContext initialization failed");
         return false;
     }
@@ -15,7 +15,7 @@ bool VulkanEngine::Initialize() {
     mUptimeSeconds = 0.0f;
 
     logger.Infof(
-        "[NkVulkan] Simple Vulkan engine initialized (instance=%p)\n",
+        "[NkVulkan] Vulkan graphics engine initialized (instance=%p)\n",
         static_cast<void*>(mContext.GetInstance())
     );
 
@@ -29,6 +29,7 @@ void VulkanEngine::Tick(float deltaSeconds) {
 
     mUptimeSeconds += deltaSeconds;
     mContext.Update(deltaSeconds);
+    mContext.RenderFrame(mUptimeSeconds);
 }
 
 void VulkanEngine::Shutdown() {

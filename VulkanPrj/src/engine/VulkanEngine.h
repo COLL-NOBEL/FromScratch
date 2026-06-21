@@ -2,11 +2,15 @@
 
 #include "engine/VulkanContext.h"
 
+namespace nkentseu {
+class NkWindow;
+}
+
 namespace graphics::vulkan {
 
 class VulkanEngine {
 public:
-    bool Initialize();
+    bool Initialize(nkentseu::NkWindow& window);
     void Tick(float deltaSeconds);
     void Shutdown();
 

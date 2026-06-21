@@ -25,7 +25,7 @@ int nkmain(const NkEntryState& /*state*/) {
     }
 
     graphics::vulkan::VulkanEngine engine;
-    if (!engine.Initialize()) {
+    if (!engine.Initialize(window)) {
         logger.Error("[NkVulkan] Engine initialization failed");
         window.Close();
         return -3;
