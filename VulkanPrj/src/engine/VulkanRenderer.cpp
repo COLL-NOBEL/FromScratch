@@ -79,14 +79,14 @@ VkShaderModule CreateShaderModule(VkDevice device, const uint32_t* code, size_t 
 }
 
 const std::array<VulkanRenderer::Vertex, 8> kCubeVertices = {{
-    {{-0.5f, -0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
-    {{ 0.5f, -0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
-    {{ 0.5f,  0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
-    {{-0.5f,  0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
-    {{-0.5f, -0.5f,  0.5f}, {0.0f, 1.0f, 0.0f}},
-    {{ 0.5f, -0.5f,  0.5f}, {0.0f, 1.0f, 0.0f}},
-    {{ 0.5f,  0.5f,  0.5f}, {0.0f, 1.0f, 0.0f}},
-    {{-0.5f,  0.5f,  0.5f}, {0.0f, 1.0f, 0.0f}},
+    {{-0.5f, -0.5f, -0.5f}, {0.0f, 0.0f, 1.0f}},
+    {{ 0.5f, -0.5f, -0.5f}, {0.0f, 0.0f, 1.0f}},
+    {{ 0.5f,  0.5f, -0.5f}, {0.0f, 0.0f, 1.0f}},
+    {{-0.5f,  0.5f, -0.5f}, {0.0f, 0.0f, 1.0f}},
+    {{-0.5f, -0.5f,  0.5f}, {0.0f, 0.0f, 1.0f}},
+    {{ 0.5f, -0.5f,  0.5f}, {0.0f, 0.0f, 1.0f}},
+    {{ 0.5f,  0.5f,  0.5f}, {0.0f, 0.0f, 1.0f}},
+    {{-0.5f,  0.5f,  0.5f}, {0.0f, 0.0f, 1.0f}},
 }};
 
 const std::array<uint32_t, 36> kCubeIndices = {{
@@ -1482,19 +1482,10 @@ void VulkanRenderer::MatrixToColumnMajorArray(const NkMat4x4<float>& matrix, flo
 }
 
 NkMat4x4<float> VulkanRenderer::BuildCubeModelMatrix(float sceneTimeSeconds) {
-    const float orbitRadians = sceneTimeSeconds * 0.9f;
-    const float orbitRadiusX = 0.95f;
-    const float orbitRadiusY = 0.55f;
+    const float rotationY = sceneTimeSeconds * NkMathUtils::deg2rad(70.0f);
+    const float rotationX = sceneTimeSeconds * NkMathUtils::deg2rad(30.0f);
 
-    const float x = std::cos(orbitRadians) * orbitRadiusX;
-    const float y = std::sin(orbitRadians) * orbitRadiusY;
-    const float z = -0.35f;
-
-    const float rotationY = sceneTimeSeconds * NkMathUtils::deg2rad(90.0f);
-    const float rotationX = sceneTimeSeconds * NkMathUtils::deg2rad(55.0f);
-
-    return NkMat4x4<float>::Translation(x, y, z)
-         * NkMat4x4<float>::RotationY(rotationY)
+    return NkMat4x4<float>::RotationY(rotationY)
          * NkMat4x4<float>::RotationX(rotationX);
 }
 
