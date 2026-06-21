@@ -1,228 +1,225 @@
-# VulkanPrj Explanation (Rotating Green Orbiting Cube)
+# VulkanPrj: Architecture, Render Flow, and Build/Run Guide
 
-This document explains the Vulkan project in `VulkanPrj/` as it exists now.
+This document describes the Vulkan project under `VulkanPrj/` as currently implemented.
 
-The current renderer draws **one green cube** that:
-
-- rotates continuously, and
-- moves in a circular path on screen.
-
-It also fixes the swapchain semaphore reuse problem that triggered:
-
-- `VUID-vkQueueSubmit-pSignalSemaphores-00067`
+Current runtime behavior:
+- opens a window,
+- initializes a Vulkan renderer,
+- draws one cube,
+- keeps the cube **green**,
+- animates the cube with continuous rotation and a **2D circular orbit** in the XY plane (equal X/Y radius).
 
 ---
 
-## 1) Project structure and file responsibilities
+## 1) Project architecture at a glance
 
-## Root build/workspace files used by VulkanPrj
+`VulkanPrj` is organized as a small layered runtime:
 
-- `trial.wks.jenga`
-  - Workspace definition that includes `VulkanPrj/vulkan.prj.jenga`.
-- `VulkanPrj/vulkan.prj.jenga`
-  - Vulkan project definition (`VKGraphicsEngine` target), source file glob, include dirs, link libs, platform filters.
+1. `src/main.cpp`
+   - Creates the window and drives the application loop.
+2. `src/engine/VulkanEngine.*`
+   - Thin lifecycle wrapper (initialize / tick / shutdown).
+3. `src/engine/VulkanContext.*`
+   - Owns camera state and coordinates instance + renderer.
+4. `src/engine/VulkanInstance.*`
+   - Creates and destroys `VkInstance` plus optional validation setup.
+5. `src/engine/VulkanRenderer.*`
+   - Owns all device/swapchain/pipeline/resources and performs frame rendering.
+6. `src/engine/VulkanShaderData.h`
+   - Embedded SPIR-V bytecode used by pipeline creation.
+7. `nkMath/*`
+   - Local math types/utilities used by camera/model transforms.
 
-## Vulkan runtime files
-
-- `VulkanPrj/src/main.cpp`
-  - Application entry point.
-  - Creates the window, runs the event loop, computes `deltaSeconds`, and calls engine tick.
-
-- `VulkanPrj/src/engine/VulkanEngine.h/.cpp`
-  - Thin high-level orchestrator.
-  - Owns `VulkanContext`, tracks uptime, and drives per-frame `Update` + `RenderFrame`.
-
-- `VulkanPrj/src/engine/VulkanContext.h/.cpp`
-  - Bridges app/window state and renderer state.
-  - Owns:
-    - `VulkanInstance`
-    - `VulkanRenderer`
-    - camera matrices (view/projection)
-  - Keeps camera framing stable and updates projection when window size changes.
-
-- `VulkanPrj/src/engine/VulkanInstance.h/.cpp`
-  - Creates/destroys `VkInstance`.
-  - Handles validation layer and debug utils setup.
-
-- `VulkanPrj/src/engine/VulkanRenderer.h/.cpp`
-  - Core Vulkan renderer implementation.
-  - Owns device/swapchain/render pass/pipeline/depth buffers/mesh buffers/command buffers/sync objects.
-  - Records draw commands and submits/presents every frame.
-
-- `VulkanPrj/src/engine/VulkanShaderData.h`
-  - Embedded SPIR-V shader bytecode arrays used by pipeline creation.
-  - No runtime shader file loading is required.
-
-- `VulkanPrj/src/engine/VulkanCommon.h`
-  - Shared Vulkan include + platform surface macro wiring (`VK_USE_PLATFORM_*`).
-
-## Math files used by this Vulkan project
-
-- `VulkanPrj/nkMath/NkMat4x4.h`
-- `VulkanPrj/nkMath/NkVec3.h`
-- `VulkanPrj/nkMath/NkMathUtils.h`
-
-These provide matrix math, vector types, and utility math functions used in camera and model transforms.
+The renderer intentionally uses a compact design: one mesh, one pipeline, push constants for MVP, and no descriptor sets.
 
 ---
 
-## 2) Rendering and synchronization flow
+## 2) All VulkanPrj code files and responsibilities
 
-This is the frame flow in `VulkanRenderer::Render(...)`:
+### Build definition
 
-1. Wait for the current frame fence:
-   - `mInFlightFences[mCurrentFrame]`
-2. Acquire next swapchain image:
-   - signals `mImageAvailableSemaphores[mCurrentFrame]`
-   - returns `imageIndex`
-3. Reset current frame fence.
-4. Record command buffer for that acquired `imageIndex`.
-5. Submit graphics work:
-   - waits on `mImageAvailableSemaphores[mCurrentFrame]`
-   - signals `mRenderFinishedSemaphores[imageIndex]`
-   - uses `mInFlightFences[mCurrentFrame]`
-6. Present:
-   - waits on `mRenderFinishedSemaphores[imageIndex]`
-7. Advance `mCurrentFrame` (modulo `kMaxFramesInFlight`).
+| File | Responsibility |
+| --- | --- |
+| `VulkanPrj/vulkan.prj.jenga` | Jenga project definition for target `VKGraphicsEngine` (sources, include dirs, link libs, platform-specific link settings). |
 
-## Why the semaphore bug happened and how it is fixed
+### Application + engine files
 
-The validation error was caused by signaling render-finished semaphores indexed by frame slot (`mCurrentFrame`) instead of by acquired swapchain image (`imageIndex`).
+| File | Responsibility |
+| --- | --- |
+| `VulkanPrj/src/main.cpp` | Entry point (`nkmain`): creates window, polls events, computes frame delta, calls `engine.Tick(deltaSeconds)`, throttles frame loop. |
+| `VulkanPrj/src/engine/VulkanEngine.h` | Declares high-level engine API and stores `VulkanContext` + uptime. |
+| `VulkanPrj/src/engine/VulkanEngine.cpp` | Implements initialize/tick/shutdown flow and forwards update/render to context. |
+| `VulkanPrj/src/engine/VulkanContext.h` | Declares camera state (`viewMatrix`, `projectionMatrix`) and context API. |
+| `VulkanPrj/src/engine/VulkanContext.cpp` | Builds camera matrices, creates instance + renderer, updates projection on resize, dispatches frame render calls. |
+| `VulkanPrj/src/engine/VulkanCommon.h` | Sets platform Vulkan surface macros (`VK_USE_PLATFORM_*`) and includes Vulkan headers. |
+| `VulkanPrj/src/engine/VulkanInstance.h` | Declares `VulkanInstance` wrapper and config. |
+| `VulkanPrj/src/engine/VulkanInstance.cpp` | Creates/destroys `VkInstance`, checks instance layers/extensions, enables validation/debug utils when available. |
+| `VulkanPrj/src/engine/VulkanRenderer.h` | Declares renderer state, Vulkan resource creation methods, render path, and cube model-matrix builder. |
+| `VulkanPrj/src/engine/VulkanRenderer.cpp` | Full Vulkan rendering implementation: surface/device/swapchain/pipeline/depth/mesh/commands/synchronization, per-frame record+submit+present, cube animation transform. |
+| `VulkanPrj/src/engine/VulkanShaderData.h` | Embedded vertex/fragment SPIR-V arrays consumed by `CreateGraphicsPipeline()`. |
 
-Now:
+### Math files in `VulkanPrj/nkMath`
 
-- `mImageAvailableSemaphores`: still per-frame (2 slots)
-- `mInFlightFences`: still per-frame (2 slots)
-- `mRenderFinishedSemaphores`: **per swapchain image**
-
-This ensures a render-finished semaphore is reused only with the corresponding swapchain image lifecycle, which removes the `VUID-vkQueueSubmit-pSignalSemaphores-00067` misuse pattern.
-
-On swapchain recreation, per-image render-finished semaphores are recreated to match the new image count.
-
----
-
-## 3) Cube animation (rotation + circular translation)
-
-The cube transform is built in:
-
-- `VulkanRenderer::BuildCubeModelMatrix(float sceneTimeSeconds)`
-
-Animation math:
-
-- `orbitRadians = sceneTimeSeconds * 0.9`
-- `x = cos(orbitRadians) * 0.95`
-- `y = sin(orbitRadians) * 0.55`
-- `z = -0.35`
-
-So translation follows a circular path in the XY plane (with fixed depth), which appears as circular motion on screen.
-
-Continuous rotation:
-
-- `rotationY = sceneTimeSeconds * deg2rad(90)`
-- `rotationX = sceneTimeSeconds * deg2rad(55)`
-
-Model matrix composition:
-
-- `Model = Translation * RotationY * RotationX`
-
-Per-frame final transform:
-
-- `MVP = Projection * View * Model`
-- Uploaded through push constants before `vkCmdDrawIndexed`.
-
-Color:
-
-- All cube vertices are set to green (`0, 1, 0`) in `kCubeVertices`, so the rendered cube is clearly green.
+| File | Responsibility |
+| --- | --- |
+| `VulkanPrj/nkMath/NkColor.h` | Color struct (`RGBA` bytes) and conversion helpers. |
+| `VulkanPrj/nkMath/NkMat3x3.h` | Template 3×3 matrix type with arithmetic, determinant/inverse, transforms. |
+| `VulkanPrj/nkMath/NkMat4x4.h` | Template 4×4 matrix type with arithmetic and 3D transform helpers (translation/rotation/scale/projection helpers). Core matrix type used by Vulkan camera/model math. |
+| `VulkanPrj/nkMath/NkMath.cpp` | Aggregates/compiles local math headers into one translation unit. |
+| `VulkanPrj/nkMath/NkMathUtils.h` | Scalar utility functions/constants (`clamp`, `deg2rad`, etc.). |
+| `VulkanPrj/nkMath/NkQuat.h` | Legacy quaternion implementation snapshot; content is currently commented out. |
+| `VulkanPrj/nkMath/NkRandom.h` | Legacy random helper snapshot; content is currently commented out. |
+| `VulkanPrj/nkMath/NkRectangle.h` | Rectangle type declarations and generic rect template aliases. |
+| `VulkanPrj/nkMath/NkTransform3D.h` | Alternative/static 3D transform helper template content; not part of active Vulkan render path. |
+| `VulkanPrj/nkMath/NkVec2.h` | Template 2D vector type + interpolation helpers. |
+| `VulkanPrj/nkMath/NkVec3.h` | Template 3D vector type + dot/cross/interpolation helpers. |
+| `VulkanPrj/nkMath/NkVec4.h` | Template 4D vector type + interpolation helpers. |
+| `VulkanPrj/nkMath/Quaternion.h` | Minimal quaternion POD-style container (x/y/z/w). |
 
 ---
 
-## 4) Minimal rendering design choices
+## 3) Render flow
 
-To keep the Vulkan path minimal and predictable:
+## 3.1 Startup flow
 
-- One cube is drawn (single indexed draw).
-- No descriptor sets/uniform buffers are used for transforms.
-- Push constants are used for the per-frame MVP matrix.
-- Shader code is embedded (`VulkanShaderData.h`) to avoid shader file I/O complexity.
+1. `main.cpp`
+   - Creates `NkWindow` and `VulkanEngine`.
+2. `VulkanEngine::Initialize`
+   - Builds `VulkanContextCreateInfo`, calls `VulkanContext::Initialize`.
+3. `VulkanContext::Initialize`
+   - Creates `VkInstance` via `VulkanInstance`.
+   - Initializes camera pose and computes initial `viewMatrix`/`projectionMatrix`.
+   - Initializes `VulkanRenderer` with instance, surface description, and window size.
+4. `VulkanRenderer::Initialize`
+   - Creates Vulkan surface.
+   - Picks physical device and queue families.
+   - Creates logical device and command pool.
+   - Creates pipeline layout + cube vertex/index buffers.
+   - Creates swapchain/image views/render pass/graphics pipeline.
+   - Creates depth resources, framebuffers, command buffers, sync objects.
+
+## 3.2 Per-frame flow
+
+1. `main.cpp`
+   - Computes `deltaSeconds`, polls events, calls `engine.Tick(deltaSeconds)`.
+2. `VulkanEngine::Tick`
+   - Accumulates `mUptimeSeconds`, calls context `Update` then `RenderFrame`.
+3. `VulkanContext::Update`
+   - Recomputes projection matrix when window size changes.
+4. `VulkanContext::RenderFrame`
+   - Calls `VulkanRenderer::Render(sceneTimeSeconds, view, projection, width, height)`.
+5. `VulkanRenderer::Render`
+   - Waits for current-frame fence.
+   - Acquires swapchain image.
+   - Handles out-of-date/suboptimal swapchain cases.
+   - Records command buffer for acquired image.
+   - Submits graphics queue work:
+     - wait semaphore: `mImageAvailableSemaphores[mCurrentFrame]`
+     - signal semaphore: `mRenderFinishedSemaphores[imageIndex]`
+   - Presents swapchain image waiting on the corresponding render-finished semaphore.
+   - Advances `mCurrentFrame` modulo `kMaxFramesInFlight`.
+
+## 3.3 Command buffer contents
+
+`VulkanRenderer::RecordCommandBuffer(...)` performs:
+- begin command buffer,
+- begin render pass (color + depth clear),
+- set viewport/scissor,
+- bind graphics pipeline,
+- bind cube vertex/index buffers,
+- compute `MVP = Projection * View * Model`,
+- upload MVP through push constants,
+- `vkCmdDrawIndexed` for cube indices,
+- end render pass and command buffer.
+
+## 3.4 Cube transform and color
+
+Cube model transform is generated in `VulkanRenderer::BuildCubeModelMatrix(sceneTimeSeconds)`:
+
+- Orbit:
+  - `orbitRadians = sceneTimeSeconds * 0.9`
+  - `x = cos(orbitRadians) * 0.75`
+  - `y = sin(orbitRadians) * 0.75`
+  - `z = -0.35`
+  - Equal X/Y radii produce an exact 2D circular orbit in the XY plane.
+- Rotation:
+  - continuous Y-axis rotation (`90°/s`),
+  - continuous X-axis rotation (`55°/s`).
+- Composition:
+  - `Model = Translation * RotationY * RotationX`
+
+Cube color comes from per-vertex color in `kCubeVertices` (all vertices set to `{0, 1, 0}`), so the cube renders green.
 
 ---
 
-## 5) Build and run from scratch
+## 4) Build and run VulkanPrj from scratch
 
-## Prerequisites
+## 4.1 Prerequisites
 
 - Git
-- Python 3.8+
-- Jenga (`jenga-build`)
-- C++ toolchain for your platform
-- Vulkan SDK / Vulkan development headers and loader
+- Python 3.8+ (for Jenga)
+- C++ toolchain supported by your platform
+- Vulkan SDK/runtime (headers + loader + libs)
+- Dependencies required by workspace projects (`Externals/libs/nkentseu` is expected by the workspace/project setup)
 
-### Windows-specific note
+Install Jenga:
 
-`VulkanPrj/vulkan.prj.jenga` currently references this SDK path:
+```bash
+python3 -m pip install --upgrade jenga-build
+jenga --version
+```
 
-- `C:\VulkanSDK\1.4.341.0\Include`
-- `C:\VulkanSDK\1.4.341.0\Lib`
-
-If your Vulkan SDK is installed elsewhere, update those paths before building.
-
-## Step-by-step commands
-
-1. Clone and enter repository:
+## 4.2 Clone and enter repository
 
 ```bash
 git clone https://github.com/COLL-NOBEL/FromScratch.git
 cd FromScratch
 ```
 
-2. Install Jenga:
-
-```bash
-python -m pip install --upgrade jenga-build
-jenga --version
-```
-
-3. Generate build files:
+## 4.3 Generate build files
 
 ```bash
 jenga generate --config=Debug
 ```
 
-4. Build Vulkan target:
+## 4.4 Build Vulkan target
 
 ```bash
 jenga build --project=VKGraphicsEngine --config=Debug
 ```
 
-5. Run executable:
+## 4.5 Run the executable
 
-- Windows (example):
+Typical output locations:
 
-```bash
-Build\\Bin\\Debug-Windows\\VKGraphicsEngine\\VKGraphicsEngine.exe
-```
-
-- Linux (example):
+- Linux:
 
 ```bash
 ./Build/Bin/Debug-Linux/VKGraphicsEngine/VKGraphicsEngine
 ```
 
-(Exact output folder naming can vary by selected config/platform/toolchain.)
-
-## Linux package hint (if Vulkan headers/libs are missing)
-
-Example Ubuntu/Debian packages:
+- Windows:
 
 ```bash
-sudo apt-get update
-sudo apt-get install -y build-essential clang libvulkan-dev libx11-dev
+Build\\Bin\\Debug-Windows\\VKGraphicsEngine\\VKGraphicsEngine.exe
 ```
+
+(Exact folder names can vary with toolchain/config/platform.)
+
+## 4.6 Platform notes
+
+- On Linux, if Vulkan dev packages are missing, install at least Vulkan loader headers/libs and X11 development packages.
+- `VulkanPrj/vulkan.prj.jenga` currently includes Windows Vulkan SDK include/lib paths under `C:\\VulkanSDK\\1.4.341.0\\...`; if your SDK is elsewhere, update those paths before Windows builds.
 
 ---
 
-## 6) Runtime summary
+## 5) Quick troubleshooting
 
-At runtime the app initializes Vulkan, records one indexed cube draw each frame, applies animated model transforms, and presents through a swapchain-safe synchronization strategy.
-
-Result: a stable, continuously rotating green cube orbiting in a circular path, with corrected semaphore usage for presentation synchronization.
+- `vkCreateInstance` failure:
+  - verify Vulkan runtime/loader installation.
+- Surface creation failure:
+  - verify window backend/platform macros and runtime support.
+- Linker errors for Vulkan symbols:
+  - verify Vulkan SDK include/lib paths (especially on Windows).
+- Swapchain recreation loops on resize:
+  - ensure valid non-zero window dimensions (renderer already guards against zero-sized windows).

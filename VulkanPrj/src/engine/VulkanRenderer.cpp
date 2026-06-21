@@ -1483,17 +1483,16 @@ void VulkanRenderer::MatrixToColumnMajorArray(const NkMat4x4<float>& matrix, flo
 
 NkMat4x4<float> VulkanRenderer::BuildCubeModelMatrix(float sceneTimeSeconds) {
     const float orbitRadians = sceneTimeSeconds * 0.9f;
-    const float orbitRadiusX = 0.95f;
-    const float orbitRadiusY = 0.55f;
+    const float orbitRadius = 0.75f;
 
-    const float x = std::cos(orbitRadians) * orbitRadiusX;
-    const float y = std::sin(orbitRadians) * orbitRadiusY;
-    const float z = -0.35f;
+    const float x = std::cos(orbitRadians) * orbitRadius;
+    const float y = std::sin(orbitRadians) * orbitRadius;
+    constexpr float kOrbitPlaneZ = -0.35f;
 
     const float rotationY = sceneTimeSeconds * NkMathUtils::deg2rad(90.0f);
     const float rotationX = sceneTimeSeconds * NkMathUtils::deg2rad(55.0f);
 
-    return NkMat4x4<float>::Translation(x, y, z)
+    return NkMat4x4<float>::Translation(x, y, kOrbitPlaneZ)
          * NkMat4x4<float>::RotationY(rotationY)
          * NkMat4x4<float>::RotationX(rotationX);
 }
