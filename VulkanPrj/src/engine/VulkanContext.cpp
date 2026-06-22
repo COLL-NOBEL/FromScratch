@@ -97,17 +97,24 @@ void VulkanContext::RebuildViewMatrix() {
 
     mCamera.forward = forward.Normalize();
 
-    const NkMat4x4<float> rotation =
-        NkMat4x4<float>::RotationY(-mCamera.yawRadians) *
-        NkMat4x4<float>::RotationX(-mCamera.pitchRadians);
+    NkVec3<float> worldUp(0.0f, 1.0f, 0.0f);
+    if (std::abs(mCamera.forward.Dot(worldUp)) > 0.999f) {
+        worldUp = NkVec3<float>(0.0f, 0.0f, 1.0f);
+    }
 
-    const NkMat4x4<float> translation = NkMat4x4<float>::Translation(
-        -mCamera.position[0],
-        -mCamera.position[1],
-        -mCamera.position[2]
+    const NkVec3<float> right = mCamera.forward.CrossProduct(worldUp).Normalize();
+    mCamera.up = right.CrossProduct(mCamera.forward).Normalize();
+
+    const float tx = -right.Dot(mCamera.position);
+    const float ty = -mCamera.up.Dot(mCamera.position);
+    const float tz = mCamera.forward.Dot(mCamera.position);
+
+    mCamera.viewMatrix = NkMat4x4<float>(
+        right[0],            right[1],            right[2],            tx,
+        mCamera.up[0],       mCamera.up[1],       mCamera.up[2],       ty,
+        -mCamera.forward[0], -mCamera.forward[1], -mCamera.forward[2], tz,
+        0.0f,                0.0f,                0.0f,                1.0f
     );
-
-    mCamera.viewMatrix = rotation * translation;
 }
 
 void VulkanContext::RebuildProjectionMatrix(float aspectRatio) {
