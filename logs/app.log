@@ -100,3 +100,45 @@
 
 [2026-06-21 11:04:45.157] [INF] [default] [VulkanEngine.cpp:41 in Shutdown] -> [NkVulkan] Engine shutdown after 48.23 seconds
 
+[2026-06-22 00:26:53.682] [INF] [default] [VulkanInstance.cpp:79 in Create] -> [NkVulkan] Validation layer enabled
+
+[2026-06-22 00:26:53.769] [INF] [default] [VulkanInstance.cpp:119 in Create] -> [NkVulkan] VkInstance created (API 1.2.0)
+
+[2026-06-22 00:26:53.769] [INF] [default] [VulkanRenderer.cpp:470 in PickPhysicalDevice] -> [NkVulkan] Using GPU: Intel(R) HD Graphics 630
+
+[2026-06-22 00:26:53.818] [INF] [default] [VulkanRenderer.cpp:182 in Initialize] -> [NkVulkan] Vulkan renderer initialized with swapchain and graphics pipeline
+
+[2026-06-22 00:26:53.818] [INF] [default] [VulkanEngine.cpp:17 in Initialize] -> [NkVulkan] Vulkan graphics engine initialized (instance=000001bf9021b720)
+
+[2026-06-22 00:27:00.509] [INF] [default] [VulkanInstance.cpp:133 in Destroy] -> [NkVulkan] VkInstance destroyed
+
+[2026-06-22 00:27:00.509] [INF] [default] [VulkanEngine.cpp:41 in Shutdown] -> [NkVulkan] Engine shutdown after 6.56 seconds
+
+[2026-06-22 00:31:43.268] [INF] [default] [VulkanInstance.cpp:79 in Create] -> [NkVulkan] Validation layer enabled
+
+[2026-06-22 00:31:43.352] [INF] [default] [VulkanInstance.cpp:119 in Create] -> [NkVulkan] VkInstance created (API 1.2.0)
+
+[2026-06-22 00:31:43.356] [INF] [default] [VulkanRenderer.cpp:470 in PickPhysicalDevice] -> [NkVulkan] Using GPU: Intel(R) HD Graphics 630
+
+[2026-06-22 00:31:43.403] [INF] [default] [VulkanRenderer.cpp:182 in Initialize] -> [NkVulkan] Vulkan renderer initialized with swapchain and graphics pipeline
+
+[2026-06-22 00:31:43.403] [INF] [default] [VulkanEngine.cpp:17 in Initialize] -> [NkVulkan] Vulkan graphics engine initialized (instance=000002446a0a6af0)
+
+[2026-06-22 00:31:47.857] [INF] [default] [VulkanInstance.cpp:133 in Destroy] -> [NkVulkan] VkInstance destroyed
+
+[2026-06-22 00:31:47.857] [INF] [default] [VulkanEngine.cpp:41 in Shutdown] -> [NkVulkan] Engine shutdown after 4.37 seconds
+
+[2026-06-22 01:08:44.369] [INF] [default] [VulkanInstance.cpp:79 in Create] -> [NkVulkan] Validation layer enabled
+
+[2026-06-22 01:08:44.486] [INF] [default] [VulkanInstance.cpp:119 in Create] -> [NkVulkan] VkInstance created (API 1.2.0)
+
+[2026-06-22 01:08:44.493] [INF] [default] [VulkanRenderer.cpp:470 in PickPhysicalDevice] -> [NkVulkan] Using GPU: Intel(R) HD Graphics 630
+
+[2026-06-22 01:08:44.560] [INF] [default] [VulkanRenderer.cpp:182 in Initialize] -> [NkVulkan] Vulkan renderer initialized with swapchain and graphics pipeline
+
+[2026-06-22 01:08:44.560] [INF] [default] [VulkanEngine.cpp:17 in Initialize] -> [NkVulkan] Vulkan graphics engine initialized (instance=000001430074bde0)
+
+[2026-06-22 01:10:06.941] [INF] [default] [VulkanInstance.cpp:133 in Destroy] -> [NkVulkan] VkInstance destroyed
+
+[2026-06-22 01:10:06.941] [INF] [default] [VulkanEngine.cpp:41 in Shutdown] -> [NkVulkan] Engine shutdown after 82.05 seconds
+
