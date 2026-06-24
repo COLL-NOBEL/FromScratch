@@ -19,6 +19,9 @@ public:
 
     void Activate();
     void Delete();
+
+private:
+    void compileErrors(unsigned int shader, const char* type);
 };
 
 #endif

@@ -27,6 +27,7 @@ with project("MyOpenGLApp"):
         "src", "shaders", "engine",
         "%{wks.location}/Externals/libs/nkentseu/include",
         "%{wks.location}/Externals/libs/NKGlad/include",
+        "%{wks.location}/Externals/libs/stb",
     ])
     
     links([

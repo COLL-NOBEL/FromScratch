@@ -16,6 +16,7 @@
 #include "NKContext/Core/NkIGraphicsContext.h"
 #include "NKContext/Core/NkOpenGLDesc.h"
 #include "NKContext/Graphics/OpenGL/NkOpenGLContextData.h"
+#include "stb_image.h"
 
 // #include "engine/Renderer.h"
 
@@ -139,6 +140,7 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     VAO1.Unbind();
     VBO1.Unbind();
     EBO1.Unbind();
+    GLuint myUniform = glGetUniformLocation(shaderProgram.ID, "scale");
 
 
     // Step 5: Initialize graphics-engine scaffold
@@ -148,6 +150,7 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     glClear(GL_COLOR_BUFFER_BIT);   // Clearing the color buffer with the color specified for clearing
 
     shaderProgram.Activate();  // Activating the shader program for rendering
+    glUniform1f(myUniform, 0.5f);  // Setting the value of the uniform variable
 
 
     // Step 6: Main loop
