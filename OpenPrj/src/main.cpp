@@ -17,7 +17,7 @@
 #include "NKContext/Core/NkOpenGLDesc.h"
 #include "NKContext/Graphics/OpenGL/NkOpenGLContextData.h"
 
-#include "engine/Renderer.h"
+// #include "engine/Renderer.h"
 
 #include <chrono>
 
@@ -58,6 +58,8 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     cfg.centered = true;
     cfg.resizable = true;
 
+
+    // We create a window called "window" and log the message "Failed to create window" if window creating fails.
     NkWindow window;
     if (!window.Create(cfg)) {
         logger.Error("Failed to create window");
@@ -67,8 +69,8 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     // Step 2: Configure OpenGL context
     NkContextDesc desc;
     desc.api = NkGraphicsApi::NK_API_OPENGL;
-    desc.opengl.majorVersion = 4;
-    desc.opengl.minorVersion = 6;
+    desc.opengl.majorVersion = 3;
+    desc.opengl.minorVersion = 3;
     desc.opengl.profile = NkGLProfile::Core;
     desc.opengl.contextFlags = NkGLContextFlags::ForwardCompat | NkGLContextFlags::Debug;
     desc.opengl.runtime.installDebugCallback = true;
@@ -94,48 +96,43 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     }
 
     // Step 5: Initialize graphics-engine scaffold
-    graphics::Renderer renderer;
-    const auto initialSize = window.GetSize();
+    glViewport(0, 0, window.GetSize().width, window.GetSize().height);
 
-    if (!renderer.Init(initialSize.width, initialSize.height)) {
-        logger.Error("[OpenGL] Renderer initialization failed");
-        ctx->Shutdown();
-        window.Close();
-        return -5;
-    }
+    glClearColor(0.07f, 0.13f, 0.17f, 1.0f);  // setting color to clear the window or screen with
+    glClear(GL_COLOR_BUFFER_BIT);   // Clearing the color buffer with the color specified for clearing
 
     // Step 6: Main loop
     bool running = true;
     auto& events = NkEvents();
     const auto appStartTime = std::chrono::steady_clock::now();
 
+
+    // Loop that continues and keeps window and app live
     while (running) {
-        while (NkEvent* ev = events.PollEvent()) {
+        while (NkEvent* ev = events.PollEvent()) { // Polling events from the event queue
             if (ev->Is<NkWindowCloseEvent>()) {
                 running = false;
                 break;
             }
         }
 
-        if (!running) {
+        if (!running) { // creating condition for breaking loop
             break;
         }
 
         if (ctx->BeginFrame()) {
             const auto currentSize = window.GetSize();
-            renderer.Resize(currentSize.width, currentSize.height);
+            glViewport(0, 0, currentSize.width, CurrentSize.height); // resizing the screen
+            glClear(GL_COLOR_BUFFER_BIT); // clear the color buffer with the color specified for clearing
 
-            const auto now = std::chrono::steady_clock::now();
-            const float elapsedSeconds = std::chrono::duration<float>(now - appStartTime).count();
-            renderer.Render(elapsedSeconds);
 
             ctx->EndFrame();
-            ctx->Present();
+            ctx->Present();  // Present the rendered (or cleared color) frame to the screen or window
         }
     }
 
-    // Step 7: Cleanup
-    renderer.Shutdown();
+
+    
     ctx->Shutdown();
     window.Close();
 
