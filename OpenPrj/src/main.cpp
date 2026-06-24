@@ -107,23 +107,18 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     GLfloat vertices[] = 
     {
         // Bottom row (3 vertices)
-        -0.5f, -0.433f, 0.0f,       0.2f, 0.1f, 0.3f,     // Vertex 0: bottom-left
-        0.0f, -0.433f, 0.0f,        0.4f, 0.5f, 0.6f,     // Vertex 1: bottom-center
-        0.5f, -0.433f, 0.0f,        0.7f, 0.8f, 0.9f,     // Vertex 2: bottom-right
+        -0.5f, 0.5f, 0.0f,       0.2f, 0.1f, 0.3f,         2.0f, 0.0f,// Vertex 0: top-left
+        0.5f, 0.5f, 0.0f,        0.4f, 0.5f, 0.6f,         2.0f, 2.0f,// Vertex 1: top-right
+        -0.5f, -0.5f, 0.0f,      0.7f, 0.8f, 0.9f,         0.0f, 0.0f,// Vertex 2: bottom-left
         
         // Middle row (2 vertices)
-        -0.25f,  0.0f,   0.0f,      0.1f, 0.2f, 0.3f,     // Vertex 3: middle-left
-        0.25f,  0.0f,   0.0f,       0.4f, 0.5f, 0.6f,     // Vertex 4: middle-right
-        
-        // Top vertex (1 vertex)
-        0.0f,   0.433f, 0.0f,        0.7f, 0.8f, 0.9f,      // Vertex 5: top
+        0.5f,  -0.5f,   0.0f,    0.1f, 0.2f, 0.3f,         0.0f, 2.0f,// Vertex 3: bottom-right
     };
 
     GLuint indices[] = 
     {
-        0, 1, 3, 
-        1, 2, 4, 
-        3, 4, 5
+        0, 1, 2, 
+        1, 2, 3, 
     };
 
     // Creating a shader program from the vertex and fragment shader files
@@ -135,13 +130,42 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     VBO VBO1(vertices, sizeof(vertices));
     EBO EBO1(indices, sizeof(indices));
 
-    VAO1.LinkAttributes(VBO1, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
-    VAO1.LinkAttributes(VBO1, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    VAO1.LinkAttributes(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+    VAO1.LinkAttributes(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    VAO1.LinkAttributes(VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     VAO1.Unbind();
     VBO1.Unbind();
     EBO1.Unbind();
-    GLuint myUniform = glGetUniformLocation(shaderProgram.ID, "scale");
 
+    // Texture properties
+    int imgWidth, imgHeight, colChannels;
+    unsigned char* imgBytes = stbi_load("OpenPrj/assets/square_image.JPG", &imgWidth, &imgHeight, &colChannels, 0);
+
+    // Initializing texture, generating ID and binding to texture slot or target.
+    GLuint imgTexture;
+    glGenTextures(1, &imgTexture);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, imgTexture); // Binding texture for loading to texture
+
+    // More texture settings, setting the texture wrapping and filtering parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imgWidth, imgHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, imgBytes);
+    glGenerateMipmap(GL_TEXTURE_2D);  //  Generate image mipmap to correctly map image from a distance
+
+    // image texture has already been loaded, so we free the memory in imgBytes
+    stbi_image_free(imgBytes);
+    glBindTexture(GL_TEXTURE_2D, 0); // Unbinding texture to avoid unnecessary modification
+
+    GLuint scaleUniform = glGetUniformLocation(shaderProgram.ID, "scale"); // Declaring uniform for scaling
+    GLuint textureUniform = glGetUniformLocation(shaderProgram.ID, "actualTexture"); // Declaring Uniform for texturing vertices on texture
+
+    shaderProgram.Activate();  // Activating the shader program for rendering
+    glUniform1f(scaleUniform, 0.5f);  // Setting the value of the uniform variable
+    glUniform1i(textureUniform, 0);  
 
     // Step 5: Initialize graphics-engine scaffold
     glViewport(0, 0, window.GetSize().width, window.GetSize().height);
@@ -149,10 +173,7 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     glClearColor(0.07f, 0.13f, 0.17f, 1.0f);  // setting color to clear the window or screen with
     glClear(GL_COLOR_BUFFER_BIT);   // Clearing the color buffer with the color specified for clearing
 
-    shaderProgram.Activate();  // Activating the shader program for rendering
-    glUniform1f(myUniform, 0.5f);  // Setting the value of the uniform variable
-
-
+    
     // Step 6: Main loop
     bool running = true;
     auto& events = NkEvents();
@@ -180,7 +201,9 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
             
             VAO1.Bind();           // Binding the VAO to use the vertex attribute configuration for rendering
 
-            glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0); // Drawing the triangle using the index data in the EBO
+            glBindTexture(GL_TEXTURE_2D, imgTexture); // Binding texture to square (two triangles)
+
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); // Drawing the triangle using the index data in the EBO
 
             ctx->EndFrame();
             ctx->Present();  // Present the rendered (or cleared color) frame to the screen or window
@@ -190,6 +213,7 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     VAO1.Delete();
     VBO1.Delete();
     EBO1.Delete();
+    glDeleteTextures(1, &imgTexture);
     shaderProgram.Delete();
 
     

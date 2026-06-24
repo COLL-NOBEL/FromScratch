@@ -20,11 +20,12 @@ with project("MyOpenGLApp"):
         "shaders/**.h",
         "shaders/**.vert",
         "shaders/**.frag",
-        "shaders/**.cpp"
+        "shaders/**.cpp",
+        "assets/**.JPG",
     ])
 
     includedirs([
-        "src", "shaders", "engine",
+        "src", "shaders", "engine", "assets",
         "%{wks.location}/Externals/libs/nkentseu/include",
         "%{wks.location}/Externals/libs/NKGlad/include",
         "%{wks.location}/Externals/libs/stb",
