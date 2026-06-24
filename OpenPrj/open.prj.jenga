@@ -17,10 +17,14 @@ with project("MyOpenGLApp"):
 
     files([
         "src/**.cpp",
+        "shaders/**.h",
+        "shaders/**.vert",
+        "shaders/**.frag",
+        "shaders/**.cpp"
     ])
 
     includedirs([
-        "src",
+        "src", "shaders", "engine",
         "%{wks.location}/Externals/libs/nkentseu/include",
         "%{wks.location}/Externals/libs/NKGlad/include",
     ])

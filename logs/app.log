@@ -131,3 +131,269 @@
 
 [2026-06-24 10:25:58.673] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
 
+[2026-06-24 10:59:55.619] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 10:59:55.629] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 10:59:55.630] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=0000021b3a231b40
+[2026-06-24 10:59:55.630] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 10:59:55.631] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 10:59:55.632] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 10:59:55.633] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 10:59:55.633] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 10:59:55.742] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 10:59:55.742] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 10:59:55.742] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 10:59:55.742] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 10:59:55.742] [INF] [default] [main.cpp:62 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 11:00:07.254] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
+[2026-06-24 11:01:48.449] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 11:01:48.449] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 11:01:48.456] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=0000022be88acdc0
+[2026-06-24 11:01:48.464] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 11:01:48.465] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 11:01:48.465] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 11:01:48.465] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 11:01:48.465] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 11:01:48.584] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 11:01:48.584] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 11:01:48.584] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 11:01:48.584] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 11:01:48.587] [INF] [default] [main.cpp:62 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 11:01:52.406] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
+[2026-06-24 11:08:14.704] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 11:08:14.705] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 11:08:14.706] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=00000198c1824620
+[2026-06-24 11:08:14.706] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 11:08:14.715] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 11:08:14.716] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 11:08:14.716] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 11:08:14.717] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 11:08:14.823] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 11:08:14.823] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 11:08:14.824] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 11:08:14.824] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 11:08:14.829] [INF] [default] [main.cpp:62 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 11:08:21.557] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
+[2026-06-24 11:09:14.648] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 11:09:14.649] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 11:09:14.653] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=0000021263132df0
+[2026-06-24 11:09:14.654] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 11:09:14.659] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 11:09:14.660] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 11:09:14.660] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 11:09:14.660] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 11:09:14.767] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 11:09:14.767] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 11:09:14.769] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 11:09:14.769] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 11:09:14.772] [INF] [default] [main.cpp:62 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 11:09:18.188] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
+[2026-06-24 11:10:52.235] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 11:10:52.241] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 11:10:52.243] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=0000021806aefca0
+[2026-06-24 11:10:52.244] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 11:10:52.244] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 11:10:52.244] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 11:10:52.245] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 11:10:52.245] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 11:10:52.357] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 11:10:52.357] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 11:10:52.357] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 11:10:52.357] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 11:10:52.363] [INF] [default] [main.cpp:62 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 11:10:59.003] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
+[2026-06-24 11:12:59.542] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 11:12:59.547] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 11:12:59.552] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=0000021c524304d0
+[2026-06-24 11:12:59.554] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 11:12:59.554] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 11:12:59.554] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 11:12:59.554] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 11:12:59.555] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 11:12:59.679] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 11:12:59.682] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 11:12:59.682] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 11:12:59.683] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 11:12:59.687] [INF] [default] [main.cpp:62 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 11:13:03.249] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
+[2026-06-24 11:17:44.158] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 11:17:44.169] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 11:17:44.171] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=000002b359130a60
+[2026-06-24 11:17:44.172] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 11:17:44.173] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 11:17:44.173] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 11:17:44.174] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 11:17:44.174] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 11:17:44.309] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 11:17:44.310] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 11:17:44.310] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 11:17:44.310] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 11:17:44.312] [INF] [default] [main.cpp:62 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 11:18:17.741] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
+[2026-06-24 11:21:12.063] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 11:21:12.064] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 11:21:12.065] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=0000027b93dfa2e0
+[2026-06-24 11:21:12.066] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 11:21:12.066] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 11:21:12.066] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 11:21:12.067] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 11:21:12.067] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 11:21:12.175] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 11:21:12.176] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 11:21:12.176] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 11:21:12.176] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 11:21:12.179] [INF] [default] [main.cpp:62 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 11:21:31.707] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
+[2026-06-24 11:22:56.784] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 11:22:56.789] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 11:22:56.790] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=000001f371a03870
+[2026-06-24 11:22:56.790] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 11:22:56.790] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 11:22:56.790] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 11:22:56.791] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 11:22:56.791] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 11:22:56.908] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 11:22:56.908] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 11:22:56.910] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 11:22:56.910] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 11:22:56.913] [INF] [default] [main.cpp:62 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 11:23:00.511] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
+[2026-06-24 11:23:33.112] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 11:23:33.116] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 11:23:33.117] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=000001ff5eae2a00
+[2026-06-24 11:23:33.120] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 11:23:33.120] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 11:23:33.120] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 11:23:33.121] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 11:23:33.121] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 11:23:33.229] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 11:23:33.229] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 11:23:33.230] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 11:23:33.231] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 11:23:33.235] [INF] [default] [main.cpp:62 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 11:23:36.906] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
+[2026-06-24 14:00:23.579] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 14:00:23.590] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 14:00:23.593] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=000001e66d38fb40
+[2026-06-24 14:00:23.593] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 14:00:23.593] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 14:00:23.593] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 14:00:23.595] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 14:00:23.595] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 14:00:23.719] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 14:00:23.719] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 14:00:23.719] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 14:00:23.719] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 14:00:23.722] [INF] [default] [main.cpp:54 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 14:00:27.033] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
+[2026-06-24 14:17:18.077] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 14:17:18.094] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 14:17:18.095] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=000002ada8e3af10
+[2026-06-24 14:17:18.095] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 14:17:18.096] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 14:17:18.096] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 14:17:18.096] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 14:17:18.096] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 14:17:18.195] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 14:17:18.195] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 14:17:18.195] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 14:17:18.203] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 14:17:18.206] [INF] [default] [main.cpp:54 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 14:17:33.102] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
+[2026-06-24 14:18:56.806] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 14:18:56.808] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 14:18:56.809] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=00000232394c4de0
+[2026-06-24 14:18:56.810] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 14:18:56.811] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 14:18:56.811] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 14:18:56.812] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 14:18:56.812] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 14:18:56.917] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 14:18:56.917] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 14:18:56.917] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 14:18:56.920] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 14:18:56.924] [INF] [default] [main.cpp:54 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 14:19:01.471] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+
+[2026-06-24 14:28:22.040] [WRN] [default] [NkContextFactory.cpp:34 in Create] -> [NkContextFactory][DBG] Create begin api=OpenGL
+[2026-06-24 14:28:22.045] [INF] [default] [NkGpuPolicy.cpp:90 in ApplyPreContext] -> [NkGpuPolicy] api=OpenGL pref=Default vendor=Any adapterIndex=-1
+[2026-06-24 14:28:22.052] [WRN] [default] [NkContextFactory.cpp:79 in Create] -> [NkContextFactory][DBG] Context allocated ptr=00000254034ba020
+[2026-06-24 14:28:22.053] [WRN] [default] [NkContextFactory.cpp:81 in Create] -> [NkContextFactory][DBG] Initialize begin
+[2026-06-24 14:28:22.053] [WRN] [default] [NkOpenGLContext.cpp:181 in Initialize] -> [NkOpenGL][DBG] Initialize enter
+[2026-06-24 14:28:22.054] [WRN] [default] [NkOpenGLContext.cpp:183 in Initialize] -> [NkOpenGL][DBG] before mDesc copy
+[2026-06-24 14:28:22.055] [WRN] [default] [NkOpenGLContext.cpp:185 in Initialize] -> [NkOpenGL][DBG] after mDesc copy
+[2026-06-24 14:28:22.056] [WRN] [default] [NkOpenGLContext.cpp:187 in Initialize] -> [NkOpenGL][DBG] surface valid=1 1281x721
+[2026-06-24 14:28:22.158] [INF] [default] [NkOpenGLContext.cpp:573 in InitWGL] -> [NkOpenGL] WGL OK (GL 3.3 Core)
+
+[2026-06-24 14:28:22.158] [INF] [default] [NkOpenGLContext.cpp:235 in Initialize] -> [NkOpenGL] Ready - Intel(R) HD Graphics 630 | 3.3.0 - Build 31.0.101.2130 | Intel
+
+[2026-06-24 14:28:22.158] [WRN] [default] [NkContextFactory.cpp:88 in Create] -> [NkContextFactory][DBG] Initialize success
+[2026-06-24 14:28:22.158] [INF] [default] [NkContextFactory.cpp:90 in Create] -> [NkContextFactory] Context created: OpenGL
+
+[2026-06-24 14:28:22.163] [INF] [default] [main.cpp:54 in LoadGL] -> [OpenGL] OpenGL 3.3.0 - Build 31.0.101.2130  GLSL 3.30 - Build 31.0.101.2130
+
+[2026-06-24 14:28:43.701] [INF] [default] [NkOpenGLContext.cpp:324 in Shutdown] -> [NkOpenGL] Shutdown OK
+

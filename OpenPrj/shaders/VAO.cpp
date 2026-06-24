@@ -1,0 +1,34 @@
+#include "VAO.h"
+
+VAO::VAO() 
+{
+    // Generating a Vertex Array Object (VAO) to store the vertex attribute configuration
+    glGenVertexArrays(1, &ID);
+}
+
+void VAO::LinkVBO(VBO& VBO, GLuint layout) 
+{
+    // Binding the VBO to the GL_ARRAY_BUFFER target to specify that it will be used for vertex attribute data
+    VBO.Bind();
+    // Setting up the vertex attribute pointer for the specified attribute index
+    glVertexAttribPointer(layout, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    // Enabling the vertex attribute array for the specified attribute index
+    glEnableVertexAttribArray(layout);
+    // Unbinding the VBO to prevent accidental modification of the buffer data
+    VBO.Unbind();
+}
+
+void VAO::Bind()
+{
+    glBindVertexArray(ID);        // Binding the VAO to make it the current vertex array object
+}
+
+void VAO::Unbind ()
+{
+    glBindVertexArray(0);      // Unbinding the VAO to prevent accidental modification of the vertex attribute configuration
+}
+
+void VAO::Delete()
+{
+    glDeleteVertexArrays(1, &ID);    // Deleting the VAO to free up GPU memory
+}

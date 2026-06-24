@@ -21,20 +21,12 @@
 
 #include <chrono>
 
+#include "EBO.h"
+#include "VBO.h"
+#include "VAO.h"
+#include "ShaderClass.h"
 
-const char* vertexShaderSource = "#version 330 core\n"
-"layout (location = 0) in vec3 aPos;\n"
-"void main()\n"
-"{\n"
-"    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-"}\0";
 
-const char* fragmentShaderSource = "#version 330 core\n"
-"out vec4 FragColor;\n"
-"void main()\n"
-"{\n"
-"    FragColor = vec4(0.8f, 0.3f, 0.02f, 1.0f);\n"
-"}\n\0";
 
 using namespace nkentseu;
 
@@ -113,10 +105,40 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
 
     GLfloat vertices[] = 
     {
-        -0.5f, -0.5f, 0.0f, // Bottom-left vertex
-         0.5f, -0.5f, 0.0f, // Bottom-right vertex
-         0.0f,  0.5f, 0.0f  // Top vertex
+        // Bottom row (3 vertices)
+        -0.5f, -0.433f, 0.0f,   // Vertex 0: bottom-left
+        0.0f, -0.433f, 0.0f,   // Vertex 1: bottom-center
+        0.5f, -0.433f, 0.0f,   // Vertex 2: bottom-right
+        
+        // Middle row (2 vertices)
+        -0.25f,  0.0f,   0.0f,  // Vertex 3: middle-left
+        0.25f,  0.0f,   0.0f,  // Vertex 4: middle-right
+        
+        // Top vertex (1 vertex)
+        0.0f,   0.433f, 0.0f   // Vertex 5: top
     };
+
+    GLuint indices[] = 
+    {
+        0, 1, 3, 
+        1, 2, 4, 
+        3, 4, 5
+    };
+
+    // Creating a shader program from the vertex and fragment shader files
+    Shader shaderProgram("OpenPrj/shaders/pbr.vert", "OpenPrj/shaders/pbr.frag");
+
+    VAO VAO1;
+    VAO1.Bind();
+
+    VBO VBO1(vertices, sizeof(vertices));
+    EBO EBO1(indices, sizeof(indices));
+
+    VAO1.LinkVBO(VBO1, 0);
+    VAO1.Unbind();
+    VBO1.Unbind();
+    EBO1.Unbind();
+
 
     // Step 5: Initialize graphics-engine scaffold
     glViewport(0, 0, window.GetSize().width, window.GetSize().height);
@@ -124,37 +146,7 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     glClearColor(0.07f, 0.13f, 0.17f, 1.0f);  // setting color to clear the window or screen with
     glClear(GL_COLOR_BUFFER_BIT);   // Clearing the color buffer with the color specified for clearing
 
-
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
-    glCompileShader(vertexShader);
-
-    GLuint fragmentShader = glCreateShader (GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
-    glCompileShader(fragmentShader);
-
-    GLuint shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
-
-
-    GLuint VAO, VBO;
-
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+    shaderProgram.Activate();  // Activating the shader program for rendering
 
 
     // Step 6: Main loop
@@ -181,20 +173,20 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
             glViewport(0, 0, currentSize.width, currentSize.height); // resizing the screen
             glClear(GL_COLOR_BUFFER_BIT); // clear the color buffer with the color specified for clearing
             
-            glUseProgram(shaderProgram);
-            glBindVertexArray(VAO);
-            glDrawArrays(GL_TRIANGLES, 0, 3); // Draw the triangle using the vertex data
+            
+            VAO1.Bind();           // Binding the VAO to use the vertex attribute configuration for rendering
 
+            glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0); // Drawing the triangle using the index data in the EBO
 
             ctx->EndFrame();
             ctx->Present();  // Present the rendered (or cleared color) frame to the screen or window
         }
     }
 
-
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteProgram(shaderProgram);
+    VAO1.Delete();
+    VBO1.Delete();
+    EBO1.Delete();
+    shaderProgram.Delete();
 
     
     ctx->Shutdown();
