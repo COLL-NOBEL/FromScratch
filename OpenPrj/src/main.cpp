@@ -21,6 +21,21 @@
 
 #include <chrono>
 
+
+const char* vertexShaderSource = "#version 330 core\n"
+"layout (location = 0) in vec3 aPos;\n"
+"void main()\n"
+"{\n"
+"    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+"}\0";
+
+const char* fragmentShaderSource = "#version 330 core\n"
+"out vec4 FragColor;\n"
+"void main()\n"
+"{\n"
+"    FragColor = vec4(0.8f, 0.3f, 0.02f, 1.0f);\n"
+"}\n\0";
+
 using namespace nkentseu;
 
 // Load OpenGL function pointers using GLAD
@@ -95,11 +110,52 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
         return -4;
     }
 
+
+    GLfloat vertices[] = 
+    {
+        -0.5f, -0.5f, 0.0f, // Bottom-left vertex
+         0.5f, -0.5f, 0.0f, // Bottom-right vertex
+         0.0f,  0.5f, 0.0f  // Top vertex
+    };
+
     // Step 5: Initialize graphics-engine scaffold
     glViewport(0, 0, window.GetSize().width, window.GetSize().height);
 
     glClearColor(0.07f, 0.13f, 0.17f, 1.0f);  // setting color to clear the window or screen with
     glClear(GL_COLOR_BUFFER_BIT);   // Clearing the color buffer with the color specified for clearing
+
+
+    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
+    glCompileShader(vertexShader);
+
+    GLuint fragmentShader = glCreateShader (GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
+    glCompileShader(fragmentShader);
+
+    GLuint shaderProgram = glCreateProgram();
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glLinkProgram(shaderProgram);
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
+
+    GLuint VAO, VBO;
+
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+
 
     // Step 6: Main loop
     bool running = true;
@@ -122,8 +178,12 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
 
         if (ctx->BeginFrame()) {
             const auto currentSize = window.GetSize();
-            glViewport(0, 0, currentSize.width, CurrentSize.height); // resizing the screen
+            glViewport(0, 0, currentSize.width, currentSize.height); // resizing the screen
             glClear(GL_COLOR_BUFFER_BIT); // clear the color buffer with the color specified for clearing
+            
+            glUseProgram(shaderProgram);
+            glBindVertexArray(VAO);
+            glDrawArrays(GL_TRIANGLES, 0, 3); // Draw the triangle using the vertex data
 
 
             ctx->EndFrame();
@@ -131,6 +191,10 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
         }
     }
 
+
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteProgram(shaderProgram);
 
     
     ctx->Shutdown();
