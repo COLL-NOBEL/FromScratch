@@ -106,16 +106,16 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     GLfloat vertices[] = 
     {
         // Bottom row (3 vertices)
-        -0.5f, -0.433f, 0.0f,   // Vertex 0: bottom-left
-        0.0f, -0.433f, 0.0f,   // Vertex 1: bottom-center
-        0.5f, -0.433f, 0.0f,   // Vertex 2: bottom-right
+        -0.5f, -0.433f, 0.0f,       0.2f, 0.1f, 0.3f,     // Vertex 0: bottom-left
+        0.0f, -0.433f, 0.0f,        0.4f, 0.5f, 0.6f,     // Vertex 1: bottom-center
+        0.5f, -0.433f, 0.0f,        0.7f, 0.8f, 0.9f,     // Vertex 2: bottom-right
         
         // Middle row (2 vertices)
-        -0.25f,  0.0f,   0.0f,  // Vertex 3: middle-left
-        0.25f,  0.0f,   0.0f,  // Vertex 4: middle-right
+        -0.25f,  0.0f,   0.0f,      0.1f, 0.2f, 0.3f,     // Vertex 3: middle-left
+        0.25f,  0.0f,   0.0f,       0.4f, 0.5f, 0.6f,     // Vertex 4: middle-right
         
         // Top vertex (1 vertex)
-        0.0f,   0.433f, 0.0f   // Vertex 5: top
+        0.0f,   0.433f, 0.0f,        0.7f, 0.8f, 0.9f,      // Vertex 5: top
     };
 
     GLuint indices[] = 
@@ -134,7 +134,8 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     VBO VBO1(vertices, sizeof(vertices));
     EBO EBO1(indices, sizeof(indices));
 
-    VAO1.LinkVBO(VBO1, 0);
+    VAO1.LinkAttributes(VBO1, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
+    VAO1.LinkAttributes(VBO1, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3 * sizeof(float)));
     VAO1.Unbind();
     VBO1.Unbind();
     EBO1.Unbind();

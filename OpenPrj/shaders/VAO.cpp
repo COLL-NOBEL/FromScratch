@@ -6,12 +6,12 @@ VAO::VAO()
     glGenVertexArrays(1, &ID);
 }
 
-void VAO::LinkVBO(VBO& VBO, GLuint layout) 
+void VAO::LinkAttributes(VBO& VBO, GLuint layout, GLuint numComponent, GLenum type, GLsizeiptr stride, void* offset) 
 {
     // Binding the VBO to the GL_ARRAY_BUFFER target to specify that it will be used for vertex attribute data
     VBO.Bind();
     // Setting up the vertex attribute pointer for the specified attribute index
-    glVertexAttribPointer(layout, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    glVertexAttribPointer(layout, numComponent, type, GL_FALSE, stride, offset);
     // Enabling the vertex attribute array for the specified attribute index
     glEnableVertexAttribArray(layout);
     // Unbinding the VBO to prevent accidental modification of the buffer data
