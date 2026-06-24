@@ -26,6 +26,7 @@
 #include "VBO.h"
 #include "VAO.h"
 #include "ShaderClass.h"
+#include "Texture.h"
 
 
 
@@ -137,35 +138,16 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     VBO1.Unbind();
     EBO1.Unbind();
 
-    // Texture properties
-    int imgWidth, imgHeight, colChannels;
-    unsigned char* imgBytes = stbi_load("OpenPrj/assets/square_image.JPG", &imgWidth, &imgHeight, &colChannels, 0);
-
     // Initializing texture, generating ID and binding to texture slot or target.
-    GLuint imgTexture;
-    glGenTextures(1, &imgTexture);
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, imgTexture); // Binding texture for loading to texture
-
-    // More texture settings, setting the texture wrapping and filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imgWidth, imgHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, imgBytes);
-    glGenerateMipmap(GL_TEXTURE_2D);  //  Generate image mipmap to correctly map image from a distance
-
-    // image texture has already been loaded, so we free the memory in imgBytes
-    stbi_image_free(imgBytes);
-    glBindTexture(GL_TEXTURE_2D, 0); // Unbinding texture to avoid unnecessary modification
-
+    Texture squareImg("OpenPrj/assets/square_image.JPG", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
+    squareImg.texUnit(shaderProgram, "actualTexture", 0);
+    
+    
     GLuint scaleUniform = glGetUniformLocation(shaderProgram.ID, "scale"); // Declaring uniform for scaling
-    GLuint textureUniform = glGetUniformLocation(shaderProgram.ID, "actualTexture"); // Declaring Uniform for texturing vertices on texture
 
     shaderProgram.Activate();  // Activating the shader program for rendering
     glUniform1f(scaleUniform, 0.5f);  // Setting the value of the uniform variable
-    glUniform1i(textureUniform, 0);  
+    squareImg.Unbind(); 
 
     // Step 5: Initialize graphics-engine scaffold
     glViewport(0, 0, window.GetSize().width, window.GetSize().height);
@@ -201,7 +183,7 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
             
             VAO1.Bind();           // Binding the VAO to use the vertex attribute configuration for rendering
 
-            glBindTexture(GL_TEXTURE_2D, imgTexture); // Binding texture to square (two triangles)
+            squareImg.Bind(); // Binding texture to square (two triangles)
 
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0); // Drawing the triangle using the index data in the EBO
 
@@ -213,7 +195,7 @@ int nkmain(const nkentseu::NkEntryState& /*state*/) {
     VAO1.Delete();
     VBO1.Delete();
     EBO1.Delete();
-    glDeleteTextures(1, &imgTexture);
+    squareImg.Delete();
     shaderProgram.Delete();
 
     

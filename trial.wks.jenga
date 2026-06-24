@@ -114,8 +114,8 @@ with workspace("NKWindowTuto", location="."):
     with include("OpenPrj/open.prj.jenga"):
         pass 
 
-    # with include("VulkanPrj/vulkan.prj.jenga"):
-    #     pass 
+    with include("VulkanPrj/vulkan.prj.jenga"):
+        pass 
 
-    # with include("2DEngine/apps.prj.jenga"):
-    #     pass 
+    with include("2DEngine/apps.prj.jenga"):
+        pass 

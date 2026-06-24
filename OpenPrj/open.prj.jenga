@@ -22,6 +22,8 @@ with project("MyOpenGLApp"):
         "shaders/**.frag",
         "shaders/**.cpp",
         "assets/**.JPG",
+        "engine/**.h",
+        "engine/**.cpp",
     ])
 
     includedirs([
